@@ -10,4 +10,4 @@
 
 License
 -----------------
-Please, read the license.
+Please, read the [LICENSE](LICENSE).
