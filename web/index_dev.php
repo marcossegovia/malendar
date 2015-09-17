@@ -9,14 +9,13 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     || !in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1', 'fe80::1', '::1'))
 ) {
     header('HTTP/1.0 403 Forbidden');
-    exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
+    exit('You are not allowed to access this file. Check ' . basename(__FILE__) . ' for more information.');
 }
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 Debug::enable();
 
-$app = require __DIR__ . '/../src/app.php';
-require __DIR__ . '/../config/dev.php';
-require __DIR__.'/../src/controllers.php';
+$app = require __DIR__ . '/../app/app.php';
+require __DIR__ . '/../app/config/dev.php';
 $app->run();
