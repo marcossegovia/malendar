@@ -15,6 +15,7 @@ class WelcomeController
 
     public function helloAction()
     {
+        phpinfo();
         return $this->twig->render('index.html');
     }
 }
