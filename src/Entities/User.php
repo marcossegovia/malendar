@@ -20,7 +20,7 @@ class User
 
         $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
         $salt = "$3a$10$" . $salt;
-        $this->hashCode = crypt($this->$password, $salt);
+        $this->hashCode = crypt($password, $salt);
 
     }
 
