@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Malendar\Entities;
+namespace Malendar\Domain\Entities\User;
 
 
 class User

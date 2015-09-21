@@ -3,7 +3,7 @@
 
 namespace Malendar\Tests\Entities;
 
-use Malendar\Entities\User;
+use Malendar\Domain\Entities\User\User;
 
 class UserTest extends \PHPUnit_Framework_TestCase
 {
