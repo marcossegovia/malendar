@@ -8,6 +8,10 @@
 - PDF output
 - Export/import functionality
 
+Structure
+-----------------
+Malendar is run by [Silex](http://silex.sensiolabs.org/) and based in the [Skeleton](https://github.com/silexphp/Silex) crafted by Fabien Potencier
+Also Malendar's been driven by the [DDD](https://en.wikipedia.org/wiki/Domain-driven_design) architecture.
 License
 -----------------
 Please, read the [LICENSE](LICENSE).
