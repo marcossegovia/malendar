@@ -1,8 +1,9 @@
 <?php
 
-namespace Malendar\Tests\Entities;
+namespace Malendar\Tests\Infrastructure\Persistence;
 
 use Malendar\Infrastructure\Persistence\UserCaseRepository;
+use Silex\Application;
 
 class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
 {

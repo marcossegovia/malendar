@@ -1,6 +1,6 @@
 <?php
 
-namespace Malendar\Controller;
+namespace Malendar\Application\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 

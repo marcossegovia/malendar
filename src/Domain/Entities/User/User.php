@@ -4,16 +4,22 @@
 namespace Malendar\Domain\Entities\User;
 
 
+use Malendar\Domain\Entities\ValueObject\UserId;
+use Malendar\Domain\Entities\ValueObject\Email;
+
+
 class User
 {
+    private $userId;
     private $name;
     private $email;
     private $password;
     private $hashCode;
 
 
-    public function __construct($name, $email, $password)
+    public function __construct(UserId $userId, $name, Email $email, $password = null)
     {
+        $this->userId = $userId;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;

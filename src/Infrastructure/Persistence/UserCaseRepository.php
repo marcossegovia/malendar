@@ -3,16 +3,17 @@
 
 namespace Malendar\Infrastructure\Persistence;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Malendar\Domain\Entities\Repository\UserRepositoryInterface;
 use Malendar\Domain\Entities\ValueObject\UserId;
+use Doctrine\ORM\EntityManager;
 
 class UserCaseRepository implements UserRepositoryInterface
 {
     private $em;
 
-    public function __construct()
+    public function __construct(/*EntityManagerInterface $em*/)
     {
-        //EntityManager (DOCTRINE)
         //$this->$em = $em;
     }
 
@@ -21,6 +22,11 @@ class UserCaseRepository implements UserRepositoryInterface
         // TODO: Implement nextIdentity() method.
         return new UserId();
 
+    }
+
+    public function findAll()
+    {
+        // TODO: Implement findAll() method.
     }
 
     public function add()

@@ -1,6 +1,6 @@
 <?php
 
-use Malendar\Controller\WelcomeController;
+use Malendar\Application\Controller\WelcomeController;
 
 // Register Controllers and their dependencies
 $app['welcome.controller'] = $app->share(function () use ($app) {

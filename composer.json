@@ -29,7 +29,8 @@
         "symfony/translation": "~2.3",
         "symfony/twig-bridge": "~2.3",
         "symfony/validator": "~2.3",
-        "ramsey/uuid": "~2.8"
+        "ramsey/uuid": "~2.8",
+        "dflydev/doctrine-orm-service-provider": "1.0.7"
     },
     "autoload": {
         "psr-4": { "Malendar\\": "src/" }
