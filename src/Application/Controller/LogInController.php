@@ -4,7 +4,7 @@ namespace Malendar\Application\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 
-class WelcomeController
+class LogInController
 {
     private $twig;
 

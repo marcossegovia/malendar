@@ -1,10 +1,10 @@
 <?php
 
-use Malendar\Application\Controller\WelcomeController;
+use Malendar\Application\Controller\LogInController;
 
 // Register Controllers and their dependencies
 $app['welcome.controller'] = $app->share(function () use ($app) {
-    return new WelcomeController($app['twig']);
+    return new LogInController($app['twig']);
 });
 
 // Register routes
