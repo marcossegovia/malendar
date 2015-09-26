@@ -22,11 +22,11 @@ class LogInControllerTest extends WebTestCase
 
     public function testHello()
     {
-        // Test whatever
         $client = $this->createClient();
         $crawler = $client->request('GET', '/');
         $this->assertTrue($client->getResponse()->isOk());
     }
+
 
 
 }

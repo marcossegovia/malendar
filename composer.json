@@ -30,6 +30,7 @@
         "symfony/twig-bridge": "~2.3",
         "symfony/validator": "~2.3",
         "ramsey/uuid": "~2.8",
+        "doctrine/dbal":"~2.2",
         "dflydev/doctrine-orm-service-provider": "1.0.7"
     },
     "autoload": {

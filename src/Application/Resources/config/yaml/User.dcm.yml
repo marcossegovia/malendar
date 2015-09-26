@@ -1,0 +1,21 @@
+User:
+  type: entity
+  id:
+    oneToOne:
+      userId:
+        targetEntity: UserId
+        mappedBy: User
+  fields:
+    name:
+      type: string
+    email:
+      type: string
+    password:
+      type: string
+    hashCode:
+      type: string
+
+UserId:
+  type: entity
+  id:
+    type: string

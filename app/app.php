@@ -7,6 +7,7 @@ use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
+//use Palma\Silex\Provider\DoctrineORMServiceProvider;
 
 $app = new Application();
 $app->register(new UrlGeneratorServiceProvider());
@@ -18,22 +19,29 @@ $app->register(new TwigServiceProvider());
 
 $app->register(new DoctrineServiceProvider(), array(
     'db.options' => array(
-        'driver' => 'pdo_sqlite',
-        'path' => __DIR__ . '/db.sqlite',
-    ),
+            'driver'   => 'pdo_mysql',
+            'dbname'   => 'world',
+            'host'     => 'localhost',
+            'user'     => 'root',
+            'password' => 'root',
+            'charset'  => 'utf8',
+    )
 ));
 
 $app->register(new DoctrineOrmServiceProvider, array(
+    "orm.proxies_dir" => __DIR__ . "/var/cache/doctrine/proxy",
     "orm.em.options" => array(
         "mappings" => array(
             array(
-                "type" => "yml",
-                "namespace" => 'Malendar\Domain\Entities',
-                "path" => __DIR__ . "/../src/Application/Resources/Config",
+                'type' => 'yml',
+                'namespace' => '',
+                'path' => __DIR__ . "/../src/Application/Resources/config/yaml/",
             ),
         ),
     ),
 ));
+
+
 
 $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
     // add custom globals, filters, tags, ...
