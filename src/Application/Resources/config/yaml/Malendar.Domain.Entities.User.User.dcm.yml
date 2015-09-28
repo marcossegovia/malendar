@@ -11,7 +11,5 @@ Malendar\Domain\Entities\User\User:
     email:
       type: string
       length: 255
-    password:
-      type: string
     hashCode:
       type: string

@@ -13,7 +13,6 @@ class User
     private $userId;
     private $name;
     private $email;
-    private $password;
     private $hashCode;
 
 
@@ -22,7 +21,6 @@ class User
         $this->userId = $userId;
         $this->name = $name;
         $this->email = $email;
-        $this->password = $password;
 
         $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
         $salt = "$3a$10$" . $salt;
@@ -38,11 +36,6 @@ class User
     public function getEmail()
     {
         return $this->email;
-    }
-
-    public function getPassword()
-    {
-        return $this->password;
     }
 
     public function getHashCode()

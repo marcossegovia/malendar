@@ -12,13 +12,13 @@ final class UserId
 
     public function __construct()
     {
-        $this->id = Uuid::uuid4();
+        $this->user_id = Uuid::uuid4();
     }
 
     public function __toString()
     {
         // TODO: Implement __toString() method.
-        return $this->id->toString();
+        return $this->user_id->toString();
     }
 
     public function equals(UserId $userId)

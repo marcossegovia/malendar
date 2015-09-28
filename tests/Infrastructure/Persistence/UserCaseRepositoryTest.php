@@ -21,8 +21,10 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
         $em = $app['orm.em'];
         $repository = new UserCaseRepository();
         $email = new Email('pablo@gmail.com');
-        $user = new User($repository->nextIdentity(), 'Pablo', $email, '1234');
+        $userId = $repository->nextIdentity();
+        $user = new User($userId, 'Pablo', $email, '1245');
         $em->persist($user);
+        $em->persist($userId);
         $em->flush();
 
         $this->assertTrue(true);

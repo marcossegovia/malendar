@@ -18,7 +18,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $user = new User($repository->nextIdentity(), 'Pablo', $email, '1234');
         $this->assertEquals('Pablo', $user->getName());
         $this->assertEquals('pablo@gmail.com', $user->getEmail());
-        $this->assertEquals('1234', $user->getPassword());
     }
 
     public function testUserValidatePassword()

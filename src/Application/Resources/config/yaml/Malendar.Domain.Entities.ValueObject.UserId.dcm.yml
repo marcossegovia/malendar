@@ -4,9 +4,8 @@ Malendar\Domain\Entities\ValueObject\UserId:
   id:
     id:
       type: integer
-      id: true
       generator:
-      strategy: AUTO
+        strategy: AUTO
   fields:
     user_id:
       type: string
