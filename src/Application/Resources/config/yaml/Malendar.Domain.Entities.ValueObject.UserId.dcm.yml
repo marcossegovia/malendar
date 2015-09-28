@@ -1,0 +1,12 @@
+Malendar\Domain\Entities\ValueObject\UserId:
+  type: entity
+  table: user_id
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+      strategy: AUTO
+  fields:
+    user_id:
+      type: string

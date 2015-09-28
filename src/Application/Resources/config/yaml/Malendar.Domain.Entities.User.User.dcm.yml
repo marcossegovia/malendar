@@ -1,0 +1,17 @@
+Malendar\Domain\Entities\User\User:
+  type: entity
+  table: user
+  id:
+    userId:
+      type: string
+  fields:
+    name:
+      type: string
+      length: 255
+    email:
+      type: string
+      length: 255
+    password:
+      type: string
+    hashCode:
+      type: string

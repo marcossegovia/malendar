@@ -8,6 +8,7 @@ use Rhumsaa\Uuid\Uuid;
 final class UserId
 {
     private $id;
+    private $user_id;
 
     public function __construct()
     {

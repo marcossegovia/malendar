@@ -34,13 +34,12 @@ $app->register(new DoctrineOrmServiceProvider, array(
         "mappings" => array(
             array(
                 'type' => 'yml',
-                'namespace' => '',
+                'namespace' => 'Malendar\Domain\Entities\\',
                 'path' => __DIR__ . "/../src/Application/Resources/config/yaml/",
             ),
         ),
     ),
 ));
-
 
 
 $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
