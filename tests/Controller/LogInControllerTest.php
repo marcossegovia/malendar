@@ -25,6 +25,7 @@ class LogInControllerTest extends WebTestCase
         $client = $this->createClient();
         $crawler = $client->request('GET', '/');
         $this->assertTrue($client->getResponse()->isOk());
+        $this->assertTrue($crawler->filter('form')->count() > 0);
     }
 
 

@@ -15,6 +15,6 @@ class LogInController
 
     public function helloAction()
     {
-        return $this->twig->render('index.html');
+        return $this->twig->render('login.html');
     }
 }

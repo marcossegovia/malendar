@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{% block title '' %} - My Silex Application</title>
+        <title>{% block title '' %} Malendar</title>
 
-        <link href="{{ app.request.basepath }}/stylesheets/main.css" rel="stylesheet" type="text/css" />
+        <link href="{{ app.request.basepath }}/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="{{ app.request.basepath }}/css/main.css" rel="stylesheet" type="text/css" />
+        <link href="{{ app.request.basepath }}/css/login_page.css" rel="stylesheet" type="text/css" />
 
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script type="text/javascript">
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
