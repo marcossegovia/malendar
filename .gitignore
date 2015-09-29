@@ -1,3 +1,4 @@
 /vendor/
+app/var/cache/twig/*
 .idea
 composer.lock
