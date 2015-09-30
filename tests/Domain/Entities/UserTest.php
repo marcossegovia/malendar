@@ -13,7 +13,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
 {
     public function testUserHasFields()
     {
-        $repository = new UserCaseRepository();
+        $app = require __DIR__.'/../../../app/app.php';
+        $em = $app['orm.em'];
+        $repository = new UserCaseRepository($em);
         $email = new Email('pablo@gmail.com');
         $user = new User($repository->nextIdentity(), 'Pablo', $email, '1234');
         $this->assertEquals('Pablo', $user->getName());
@@ -22,7 +24,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testUserValidatePassword()
     {
-        $repository = new UserCaseRepository();
+        $app = require __DIR__.'/../../../app/app.php';
+        $em = $app['orm.em'];
+        $repository = new UserCaseRepository($em);
         $email = new Email('pablo@gmail.com');
         $user = new User($repository->nextIdentity(), 'Pablo', $email, '1234');
         $this->assertTrue($user->validate('1234'));

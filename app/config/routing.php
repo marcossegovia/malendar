@@ -1,14 +1,20 @@
 <?php
 
 use Malendar\Application\Controller\LogInController;
+use Malendar\Application\Controller\CalendarController;
 
 // Register Controllers and their dependencies
 $app['welcome.controller'] = $app->share(function () use ($app) {
-    return new LogInController($app['twig']);
+    return new LogInController($app);
+});
+$app['calendar.controller'] = $app->share(function () use ($app) {
+    return new CalendarController($app);
 });
 
 // Register routes
 $app->get('/', 'welcome.controller:helloAction')->bind('homepage');
+$app->get('/calendar', 'calendar.controller:indexAction');
+$app->post('/feedback', '');
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {

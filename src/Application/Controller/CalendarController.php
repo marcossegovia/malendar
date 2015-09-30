@@ -1,11 +1,12 @@
 <?php
 
+
 namespace Malendar\Application\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Silex\Application;
 
-class LogInController
+class CalendarController
 {
     private $app;
 
@@ -14,13 +15,8 @@ class LogInController
         $this->app = $app;
     }
 
-    public function helloAction()
+    public function indexAction()
     {
-        return $this->app['twig']->render('login.html');
-    }
-
-    public function processLogin()
-    {
-
+        return $this->app['twig']->render('calendar.html');
     }
 }

@@ -21,6 +21,11 @@ final class UserId
         return $this->user_id->toString();
     }
 
+    public function toString()
+    {
+        return $this->user_id->toString();
+    }
+
     public function equals(UserId $userId)
     {
 

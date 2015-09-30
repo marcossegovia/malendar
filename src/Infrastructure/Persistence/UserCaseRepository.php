@@ -11,10 +11,11 @@ use Doctrine\ORM\EntityManager;
 class UserCaseRepository implements UserRepositoryInterface
 {
     private $em;
+    private $users;
 
-    public function __construct(/*EntityManagerInterface $em*/)
+    public function __construct(EntityManagerInterface $em)
     {
-        //$this->$em = $em;
+        $this->em = $em;
     }
 
     public function nextIdentity()
