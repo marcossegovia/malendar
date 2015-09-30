@@ -2,6 +2,7 @@
 
 use Malendar\Application\Controller\LogInController;
 use Malendar\Application\Controller\CalendarController;
+use Symfony\Component\HttpFoundation\Response;
 
 // Register Controllers and their dependencies
 $app['welcome.controller'] = $app->share(function () use ($app) {
@@ -21,13 +22,20 @@ $app->error(function (\Exception $e, $code) use ($app) {
         return;
     }
 
-    // 404.html, or 40x.html, or 4xx.html, or error.html
-    $templates = array(
-        'errors/' . $code . '.html',
-        'errors/' . substr($code, 0, 2) . 'x.html',
-        'errors/' . substr($code, 0, 1) . 'xx.html',
-        'errors/default.html',
-    );
+    if ($code == 404) {
+        return new Response($app['twig']->render('errors/404_e.html'), $code);
+    }
+    if ($code == 500) {
+        return new Response($app['twig']->render('errors/505.html'), $code);
+    }
+    if (substr($code, 0, 1) == 4) {
+        return new Response($app['twig']->render('errors/4xx.html'), $code);
+    }
+    if (substr($code, 0, 1) == 5) {
+        return new Response($app['twig']->render('errors/5xx.html'), $code);
+    }
 
-    return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
+    return new Response($app['twig']->render('errors/default.html'), $code);
+
+
 });
