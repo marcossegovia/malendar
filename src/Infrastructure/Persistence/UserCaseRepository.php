@@ -31,14 +31,13 @@ class UserCaseRepository implements UserRepositoryInterface
     {
         // TODO: Implement findAll() method.
         $query = $this->em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u');
-            return $query->getResult();
+        return $query->getResult();
     }
 
     public function add(User $user)
     {
         // TODO: Implement add() method.
         $this->em->persist($user);
-        $this->em->persist($user->getUserId());
         $this->em->flush();
     }
 
@@ -48,14 +47,14 @@ class UserCaseRepository implements UserRepositoryInterface
         $query = $this->em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.email = :email');
         $query->setParameter('email', $email->getEmail());
         $user = $query->getResult();
-        return new User($user[0]->getUserId(), $user[0]->getName(), $user[0]->getEmail(), null);
+        return $user == null ? false : new User($user[0]->getUserId(), $user[0]->getName(), $user[0]->getEmail(), null);
     }
 
     public function findByUsername($username)
     {
         // TODO: Implement findByUsername() method.
-        $query = $this->em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.name = :name');
-        $query->setParameter('name', $username);
+        $query = $this->em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.name = :namee');
+        $query->setParameter('namee', $username);
         $user = $query->getResult();
         return new User($user[0]->getUserId(), $user[0]->getName(), $user[0]->getEmail(), null);
     }
@@ -68,6 +67,8 @@ class UserCaseRepository implements UserRepositoryInterface
     public function remove(User $user)
     {
         // TODO: Implement remove() method.
+        $this->em->remove($user);
+        $this->em->flush();
     }
 
 }

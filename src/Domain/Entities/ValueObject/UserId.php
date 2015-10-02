@@ -7,23 +7,22 @@ use Rhumsaa\Uuid\Uuid;
 
 final class UserId
 {
-    private $id;
-    private $user_id;
+    private $uuid;
 
     public function __construct()
     {
-        $this->user_id = Uuid::uuid4();
+        $this->uuid = Uuid::uuid4();
     }
 
     public function __toString()
     {
         // TODO: Implement __toString() method.
-        return $this->user_id->toString();
+        return $this->uuid->toString();
     }
 
     public function toString()
     {
-        return $this->user_id->toString();
+        return $this->uuid->toString();
     }
 
     public function equals(UserId $userId)
@@ -33,6 +32,6 @@ final class UserId
 
     public function getUserId()
     {
-        return $this->user_id;
+        return $this->uuid;
     }
 }

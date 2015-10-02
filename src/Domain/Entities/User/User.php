@@ -10,15 +10,15 @@ use Malendar\Domain\Entities\ValueObject\Email;
 
 class User
 {
-    private $userId;
+    private $uuid;
     private $name;
     private $email;
     private $hashCode;
 
 
-    public function __construct(UserId $userId, $name, Email $email, $password = null)
+    public function __construct(UserId $uuid, $name, Email $email, $password = null)
     {
-        $this->userId = $userId;
+        $this->uuid = $uuid;
         $this->name = $name;
         $this->email = $email;
 
@@ -50,11 +50,11 @@ class User
 
     public function getUserId()
     {
-        return $this->userId;
+        return $this->uuid;
     }
 
     public function equals(User $user)
     {
-        return $this->userId->equals($user->getUserId());
+        return $this->uuid->equals($user->getUserId());
     }
 }

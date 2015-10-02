@@ -1,9 +1,10 @@
 Malendar\Domain\Entities\User\User:
   type: entity
   table: user
-  id:
-    userId:
-      type: string
+  embedded:
+    uuid:
+      class: Malendar\Domain\Entities\ValueObject\UserId
+      columnPrefix: false
   fields:
     name:
       type: string

@@ -1,11 +1,5 @@
 Malendar\Domain\Entities\ValueObject\UserId:
-  type: entity
-  table: user_id
+  type: embeddable
   id:
-    id:
-      type: integer
-      generator:
-        strategy: AUTO
-  fields:
-    user_id:
-      type: string
+    uuid:
+      type:string
