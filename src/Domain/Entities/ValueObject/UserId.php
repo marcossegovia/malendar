@@ -28,6 +28,11 @@ final class UserId
 
     public function equals(UserId $userId)
     {
+        return strcmp($this->getUserId(), $userId->getUserId()) == 0;
+    }
 
+    public function getUserId()
+    {
+        return $this->user_id;
     }
 }

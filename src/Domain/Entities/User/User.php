@@ -47,4 +47,14 @@ class User
     {
         return hash_equals($this->hashCode, crypt($password, $this->hashCode));
     }
+
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    public function equals(User $user)
+    {
+        return $this->userId->equals($user->getUserId());
+    }
 }

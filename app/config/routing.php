@@ -5,7 +5,7 @@ use Malendar\Application\Controller\CalendarController;
 use Symfony\Component\HttpFoundation\Response;
 
 // Register Controllers and their dependencies
-$app['welcome.controller'] = $app->share(function () use ($app) {
+$app['login.controller'] = $app->share(function () use ($app) {
     return new LogInController($app);
 });
 $app['calendar.controller'] = $app->share(function () use ($app) {
@@ -13,9 +13,9 @@ $app['calendar.controller'] = $app->share(function () use ($app) {
 });
 
 // Register routes
-$app->get('/', 'welcome.controller:helloAction')->bind('homepage');
+$app->get('/', 'login.controller:helloAction')->bind('homepage');
 $app->get('/calendar', 'calendar.controller:indexAction');
-$app->post('/feedback', '');
+$app->post('/', 'login.controller:processLoginAction');
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {

@@ -2,13 +2,16 @@
 
 namespace Malendar\Domain\Entities\Repository;
 
+use Malendar\Domain\Entities\ValueObject\Email;
+use Malendar\Domain\Entities\User\User;
+
 interface UserRepositoryInterface
 {
     public function nextIdentity();
-    public function add();
+    public function add(User $user);
     public function findAll();
-    public function findByEmail();
-    public function findByUsername();
-    public function update();
-    public function remove();
+    public function findByEmail(Email $mail);
+    public function findByUsername($name);
+    public function update(User $user);
+    public function remove(User $user);
 }

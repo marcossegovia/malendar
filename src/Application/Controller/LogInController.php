@@ -16,11 +16,11 @@ class LogInController
 
     public function helloAction()
     {
-        return $this->app['twig']->render('login.html');
+        return new Response($this->app['twig']->render('login.html'), 200);
     }
 
-    public function processLogin()
+    public function processLoginAction()
     {
-
+        return new Response($this->app['twig']->render('login.html'), 201);
     }
 }

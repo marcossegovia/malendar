@@ -26,4 +26,14 @@ final class Email
         // TODO: Implement __toString() method.
         return $this->email;
     }
+
+    public function equals(Email $email)
+    {
+        return strcmp($this->getEmail(), $email->getEmail()) == 0;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
 }
