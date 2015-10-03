@@ -1,0 +1,6 @@
+Malendar\Domain\Entities\ValueObject\Email:
+  type: embeddable
+  fields:
+    email:
+      type: string
+      length: 255

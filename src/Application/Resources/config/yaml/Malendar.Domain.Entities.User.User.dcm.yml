@@ -5,11 +5,11 @@ Malendar\Domain\Entities\User\User:
     uuid:
       class: Malendar\Domain\Entities\ValueObject\UserId
       columnPrefix: false
+    email:
+      class: Malendar\Domain\Entities\ValueObject\Email
+      columnPrefix: false
   fields:
     name:
-      type: string
-      length: 255
-    email:
       type: string
       length: 255
     hashCode:

@@ -11,7 +11,7 @@ class LogInControllerTest extends WebTestCase
     public function createApplication()
     {
         // TODO: Implement createApplication() method.
-        $app = require __DIR__.'/../../app/app.php';
+        $app = require __DIR__ . '/../../app/app.php';
         require __DIR__ . '/../../app/config/prod.php';
         $app['debug'] = true;
         $app['session.test'] = true;
@@ -27,7 +27,6 @@ class LogInControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isOk());
         $this->assertTrue($crawler->filter('form')->count() > 0);
     }
-
 
 
 }

@@ -84,7 +84,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testFindeUserByUsername()
+    public function testFindUserByUsername()
     {
         $app = require __DIR__ . '/../../../app/app.php';
         $em = $app['orm.em'];
@@ -101,23 +101,44 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
     }
 
 
-     public function testRemoveUser()
-     {
-         $app = require __DIR__ . '/../../../app/app.php';
-         $em = $app['orm.em'];
-         $repository = new UserCaseRepository($em);
+    public function testRemoveUser()
+    {
+        $app = require __DIR__ . '/../../../app/app.php';
+        $em = $app['orm.em'];
+        $repository = new UserCaseRepository($em);
 
-         $userSent = new User($repository->nextIdentity(), 'Marcos', new Email('marcos@gmail.com'), 'marcos123');
+        $userSent = new User($repository->nextIdentity(), 'Paco', new Email('paco@gmail.com'), 'paco123');
 
-         $repository->add($userSent);
+        $repository->add($userSent);
 
-         $user1 = $repository->findByEmail(new Email('marcos@gmail.com'));
-         $this->assertFalse(empty($user1));
+        $user1 = $repository->findByEmail(new Email('paco@gmail.com'));
+        $this->assertFalse(empty($user1));
 
-         $repository->remove($userSent);
+        $repository->remove($userSent);
 
-         $user2 = $repository->findByEmail(new Email('marcos@gmail.com'));
-         $this->assertTrue(empty($user2));
-     }
+        $user2 = $repository->findByEmail(new Email('paco@gmail.com'));
+        $this->assertTrue(empty($user2));
+    }
+
+    public function testUpdateUser()
+    {
+        $app = require __DIR__ . '/../../../app/app.php';
+        $em = $app['orm.em'];
+        $repository = new UserCaseRepository($em);
+
+        $userSent = new User($repository->nextIdentity(), 'Marcos', new Email('marcos@gmail.com'), 'marcos123');
+
+        $repository->add($userSent);
+
+        $userSent->setPassword('marcos321');
+        $userSent->setUsername('Marcos-Je');
+        $repository->update();
+
+        $userReceived = $repository->findByUsername('Marcos-Je');
+
+        $this->assertTrue($userSent->equals($userReceived));
+
+        $repository->remove($userSent);
+    }
 
 }

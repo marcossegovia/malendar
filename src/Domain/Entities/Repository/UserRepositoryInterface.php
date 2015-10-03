@@ -12,6 +12,6 @@ interface UserRepositoryInterface
     public function findAll();
     public function findByEmail(Email $mail);
     public function findByUsername($name);
-    public function update(User $user);
+    public function update();
     public function remove(User $user);
 }

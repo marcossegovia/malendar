@@ -57,4 +57,16 @@ class User
     {
         return $this->uuid->equals($user->getUserId());
     }
+
+    public function setPassword($password)
+    {
+        $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
+        $salt = "$3a$10$" . $salt;
+        $this->hashCode = crypt($password, $salt);
+    }
+
+    public function setUsername($username)
+    {
+        $this->name = $username;
+    }
 }

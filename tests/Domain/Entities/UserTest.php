@@ -13,7 +13,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 {
     public function testUserHasFields()
     {
-        $app = require __DIR__.'/../../../app/app.php';
+        $app = require __DIR__ . '/../../../app/app.php';
         $em = $app['orm.em'];
         $repository = new UserCaseRepository($em);
         $email = new Email('pablo@gmail.com');
@@ -24,7 +24,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testUserValidatePassword()
     {
-        $app = require __DIR__.'/../../../app/app.php';
+        $app = require __DIR__ . '/../../../app/app.php';
         $em = $app['orm.em'];
         $repository = new UserCaseRepository($em);
         $email = new Email('pablo@gmail.com');

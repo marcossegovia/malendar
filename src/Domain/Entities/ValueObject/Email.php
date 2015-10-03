@@ -8,7 +8,6 @@ use Symfony\Component\Validator\Constraints as ValidatorAssert;
 
 final class Email
 {
-
     private $email;
 
     public function __construct($email)
