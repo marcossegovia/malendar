@@ -21,6 +21,6 @@ class LogInController
 
     public function processLoginAction()
     {
-        return new Response($this->app['twig']->render('login.html'), 201);
+        return new Response($this->app['twig']->render('calendar.html'), 201);
     }
 }
