@@ -26,13 +26,14 @@
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="user" type="text" class="form-control" name="user" value="" placeholder="User">
+                        <input id="user" type="text" class="form-control" name="user" value="" placeholder="User"
+                               required>
                     </div>
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         <input id="password" type="password" class="form-control" name="password"
-                               placeholder="Password">
+                               placeholder="Password" required>
                     </div>
 
                     <div class="form-group">
@@ -306,5 +307,8 @@
     </g>
 </svg>
 
+{% if formError == true %}
+<script src="/Malendar/web/js/login.js"></script>
+{% endif %}
 <script src="/Malendar/web/js/particle_canvas.js"></script>
 {% endblock %}

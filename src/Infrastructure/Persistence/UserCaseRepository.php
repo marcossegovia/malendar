@@ -47,7 +47,7 @@ class UserCaseRepository implements UserRepositoryInterface
         $query = $this->em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.email.email = :email');
         $query->setParameter('email', $email->getEmail());
         $user = $query->getResult();
-        return $user == null ? false : new User($user[0]->getUserId(), $user[0]->getName(), $user[0]->getEmail(), null);
+        return $user == null ? false : new User($user[0]->getUserId(), $user[0]->getName(), $user[0]->getEmail(), null, $user[0]->getHashCode());
     }
 
     public function findByUsername($username)
@@ -56,7 +56,7 @@ class UserCaseRepository implements UserRepositoryInterface
         $query = $this->em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.name = :namee');
         $query->setParameter('namee', $username);
         $user = $query->getResult();
-        return new User($user[0]->getUserId(), $user[0]->getName(), $user[0]->getEmail(), null);
+        return $user == null ? false : new User($user[0]->getUserId(), $user[0]->getName(), $user[0]->getEmail(), null, $user[0]->getHashCode());
     }
 
     public function update()

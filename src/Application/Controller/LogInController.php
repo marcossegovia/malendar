@@ -2,6 +2,7 @@
 
 namespace Malendar\Application\Controller;
 
+use Malendar\Infrastructure\Persistence\UserCaseRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Silex\Application;
 
@@ -16,11 +17,19 @@ class LogInController
 
     public function helloAction()
     {
-        return new Response($this->app['twig']->render('login.html'), 200);
+        return new Response($this->app['twig']->render('login.html', ['formError' => false]), 200);
     }
 
     public function processLoginAction()
     {
-        return new Response($this->app['twig']->render('calendar.html'), 201);
+        $userName = $this->app['request']->get('user');
+        $password = $this->app['request']->get('password');
+        $userRepository = new UserCaseRepository($this->app['orm.em']);
+        $user = $userRepository->findByUsername($userName);
+        if (!empty($user) && $user->validate($password)) {
+            return $this->app->redirect('index.php/calendar');
+        } else {
+            return new Response($this->app['twig']->render('login.html', ['formError' => true]), 201);
+        }
     }
 }

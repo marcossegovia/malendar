@@ -1,0 +1,1 @@
+$(".input-group").attr('class', 'input-group has-error');

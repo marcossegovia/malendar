@@ -16,15 +16,19 @@ class User
     private $hashCode;
 
 
-    public function __construct(UserId $uuid, $name, Email $email, $password = null)
+    public function __construct(UserId $uuid, $name, Email $email, $password = null, $hashCode = null)
     {
         $this->uuid = $uuid;
         $this->name = $name;
         $this->email = $email;
 
-        $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
-        $salt = "$3a$10$" . $salt;
-        $this->hashCode = crypt($password, $salt);
+        if ($password == null) {
+            $this->hashCode = $hashCode;
+        } else {
+            $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
+            $salt = "$3a$10$" . $salt;
+            $this->hashCode = crypt($password, $salt);
+        }
 
     }
 
