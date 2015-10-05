@@ -27,7 +27,7 @@ class LogInController
         $userRepository = new UserCaseRepository($this->app['orm.em']);
         $user = $userRepository->findByUsername($userName);
         if (!empty($user) && $user->validate($password)) {
-            return $this->app->redirect('index.php/calendar');
+            return $this->app->redirect($this->app["url_generator"]->generate("calendar"));
         } else {
             return new Response($this->app['twig']->render('login.html', ['formError' => true]), 201);
         }

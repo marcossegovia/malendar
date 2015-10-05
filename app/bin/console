@@ -17,9 +17,7 @@ $input = new ArgvInput();
 $env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
 
 //App Init
-$app = require __DIR__.'/../app.php';
-//Environment Init
-require __DIR__.'/../config/'.$env.'.php';
+$app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
 
 $console = new Application('My Silex Application', 'n/a');
 $console->getDefinition()->addOption(new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.', 'dev'));

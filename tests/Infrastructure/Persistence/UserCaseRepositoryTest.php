@@ -11,7 +11,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testNextUserIdReturnsUserId()
     {
-        $app = require __DIR__ . '/../../../app/app.php';
+        $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $em = $app['orm.em'];
         $repository = new UserCaseRepository($em);
         $this->assertInstanceOf('Malendar\Domain\Entities\ValueObject\UserId', $repository->nextIdentity());
@@ -19,7 +19,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testUserPersistance()
     {
-        $app = require __DIR__ . '/../../../app/app.php';
+        $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $em = $app['orm.em'];
         $repository = new UserCaseRepository($em);
 
@@ -34,7 +34,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testAllUsersAreFound()
     {
-        $app = require __DIR__ . '/../../../app/app.php';
+        $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $em = $app['orm.em'];
         $repository = new UserCaseRepository($em);
 
@@ -52,7 +52,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testAddingUser()
     {
-        $app = require __DIR__ . '/../../../app/app.php';
+        $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $em = $app['orm.em'];
         $repository = new UserCaseRepository($em);
 
@@ -69,7 +69,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFindUserByEmail()
     {
-        $app = require __DIR__ . '/../../../app/app.php';
+        $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $em = $app['orm.em'];
         $repository = new UserCaseRepository($em);
 
@@ -86,7 +86,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFindUserByUsername()
     {
-        $app = require __DIR__ . '/../../../app/app.php';
+        $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $em = $app['orm.em'];
         $repository = new UserCaseRepository($em);
 
@@ -103,7 +103,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveUser()
     {
-        $app = require __DIR__ . '/../../../app/app.php';
+        $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $em = $app['orm.em'];
         $repository = new UserCaseRepository($em);
 
@@ -122,7 +122,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateUser()
     {
-        $app = require __DIR__ . '/../../../app/app.php';
+        $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $em = $app['orm.em'];
         $repository = new UserCaseRepository($em);
 

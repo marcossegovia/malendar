@@ -11,7 +11,7 @@ class LogInControllerTest extends WebTestCase
     public function createApplication()
     {
         // TODO: Implement createApplication() method.
-        $app = require __DIR__ . '/../../app/app.php';
+        $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         require __DIR__ . '/../../app/config/prod.php';
         $app['debug'] = true;
         $app['session.test'] = true;
