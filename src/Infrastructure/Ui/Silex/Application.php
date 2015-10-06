@@ -15,22 +15,22 @@ class Application
     public static function boostrap()
     {
         $app = new \Silex\Application();
+
+        //Providers
         $app->register(new UrlGeneratorServiceProvider());
         $app->register(new ValidatorServiceProvider());
         $app->register(new ServiceControllerServiceProvider());
         $app->register(new TwigServiceProvider());
         $app->register(new SessionServiceProvider());
 
-        // Doctrine
-
         $app->register(new DoctrineServiceProvider(), array(
             'db.options' => array(
-                'driver'   => 'pdo_mysql',
-                'dbname'   => 'world',
-                'host'     => 'localhost',
-                'user'     => 'root',
+                'driver' => 'pdo_mysql',
+                'dbname' => 'world',
+                'host' => 'localhost',
+                'user' => 'root',
                 'password' => 'root',
-                'charset'  => 'utf8',
+                'charset' => 'utf8',
             )
         ));
 
@@ -47,12 +47,18 @@ class Application
             ),
         ));
 
+        //Services
 
         $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
-            // add custom globals, filters, tags, ...
 
             return $twig;
-        }));
+        })
+        );
+
+        $app['user_repository'] = $app->share(function($app) {
+            return $app['orm.em']->getRepository('Malendar\Domain\Entities\User\User');
+        });
+
 
         return $app;
     }

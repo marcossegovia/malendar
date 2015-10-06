@@ -1,18 +1,15 @@
 <?php
 
-namespace Malendar\Tests\Controller;
+namespace Malendar\Tests\Application;
 
-use Malendar\Application\Controller\WelcomeController;
 use Silex\WebTestCase;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class LogInControllerTest extends WebTestCase
+class RequestApplicationRoutesTest extends WebTestCase
 {
     public function createApplication()
     {
         // TODO: Implement createApplication() method.
-        $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
-        require __DIR__ . '/../../app/config/prod.php';
+        require __DIR__ . '/../../app/silex/index.php';
         $app['debug'] = true;
         $app['session.test'] = true;
         unset($app['exception_handler']);

@@ -4,13 +4,14 @@
 namespace Malendar\Infrastructure\Persistence;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Malendar\Domain\Entities\Repository\UserRepositoryInterface;
 use Malendar\Domain\Entities\ValueObject\UserId;
 use Malendar\Domain\Entities\ValueObject\Email;
 use Malendar\Domain\Entities\User\User;
 use Doctrine\ORM\EntityManager;
 
-class UserCaseRepository implements UserRepositoryInterface
+class UserCaseRepository extends EntityRepository implements UserRepositoryInterface
 {
     private $em;
     private $users;
