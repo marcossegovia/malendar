@@ -12,21 +12,19 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testNextUserIdReturnsUserId()
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
-        $em = $app['orm.em'];
-        $repository = new UserCaseRepository($em);
+        $repository = $app['user_repository'];
         $this->assertInstanceOf('Malendar\Domain\Entities\ValueObject\UserId', $repository->nextIdentity());
     }
 
     public function testUserPersistance()
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
-        $em = $app['orm.em'];
-        $repository = new UserCaseRepository($em);
+        $repository = $app['user_repository'];
 
         $user = new User($repository->nextIdentity(), 'Pablo', new Email('pablo@gmail.com'), '12745');
         $repository->add($user);
 
-        $user = $em->find('Malendar\Domain\Entities\User\User', $user->getUserId());
+        $user = $repository->find($user->getUserId());
         $this->assertTrue(count($user) == 1);
 
         $repository->remove($user);
@@ -35,8 +33,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testAllUsersAreFound()
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
-        $em = $app['orm.em'];
-        $repository = new UserCaseRepository($em);
+        $repository = $app['user_repository'];
 
         $user1 = new User($repository->nextIdentity(), 'Marcos', new Email('marcos@gmail.com'), '1234');
         $repository->add($user1);
@@ -53,15 +50,14 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testAddingUser()
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
-        $em = $app['orm.em'];
-        $repository = new UserCaseRepository($em);
+        $repository = $app['user_repository'];
 
         $userId = $repository->nextIdentity();
         $user = new User($userId, 'Juan', new Email('juan@gmail.com'), 'juanito123');
 
         $repository->add($user);
 
-        $user = $em->find('Malendar\Domain\Entities\User\User', $userId);
+        $user = $repository->find($userId);
         $this->assertTrue(count($user) == 1);
 
         $repository->remove($user);
@@ -70,8 +66,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testFindUserByEmail()
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
-        $em = $app['orm.em'];
-        $repository = new UserCaseRepository($em);
+        $repository = $app['user_repository'];
 
         $userSent = new User($repository->nextIdentity(), 'troll', new Email('troll@gmail.com'), 'troll123');
 
@@ -87,8 +82,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testFindUserByUsername()
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
-        $em = $app['orm.em'];
-        $repository = new UserCaseRepository($em);
+        $repository = $app['user_repository'];
 
         $userSent = new User($repository->nextIdentity(), 'genius', new Email('genius@gmail.com'), 'genius123');
 
@@ -104,8 +98,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testRemoveUser()
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
-        $em = $app['orm.em'];
-        $repository = new UserCaseRepository($em);
+        $repository = $app['user_repository'];
 
         $userSent = new User($repository->nextIdentity(), 'Paco', new Email('paco@gmail.com'), 'paco123');
 
@@ -123,8 +116,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testUpdateUser()
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
-        $em = $app['orm.em'];
-        $repository = new UserCaseRepository($em);
+        $repository = $app['user_repository'];
 
         $userSent = new User($repository->nextIdentity(), 'Marcos', new Email('marcos@gmail.com'), 'marcos123');
 

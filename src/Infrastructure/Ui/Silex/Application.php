@@ -20,7 +20,10 @@ class Application
         $app->register(new UrlGeneratorServiceProvider());
         $app->register(new ValidatorServiceProvider());
         $app->register(new ServiceControllerServiceProvider());
-        $app->register(new TwigServiceProvider());
+        $app->register(new TwigServiceProvider(), array(
+            'twig.path' => __DIR__ . '/../../../../src/Application/Resources/Templates',
+            'twig.options' => array('cache' => __DIR__ . '/../../../../app/var/cache/twig')
+        ));
         $app->register(new SessionServiceProvider());
 
         $app->register(new DoctrineServiceProvider(), array(
@@ -40,7 +43,7 @@ class Application
                 "mappings" => array(
                     array(
                         'type' => 'yml',
-                        'namespace' => 'Malendar\Domain\Entities\\',
+                        'namespace' => 'Malendar\\Domain\\Entities\\',
                         'path' => __DIR__ . "/../../../../src/Application/Resources/config/yaml/",
                     ),
                 ),
@@ -49,18 +52,20 @@ class Application
 
         //Services
 
+
+        $app['user_repository'] = $app->share(function ($app) {
+            return $app['orm.em']->getRepository('Malendar\Domain\Entities\User\User');
+        });
+
         $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
 
             return $twig;
         })
         );
 
-        $app['user_repository'] = $app->share(function($app) {
-            return $app['orm.em']->getRepository('Malendar\Domain\Entities\User\User');
-        });
-
-
         return $app;
+
+
     }
 }
 

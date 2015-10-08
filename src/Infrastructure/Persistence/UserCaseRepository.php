@@ -13,13 +13,7 @@ use Doctrine\ORM\EntityManager;
 
 class UserCaseRepository extends EntityRepository implements UserRepositoryInterface
 {
-    private $em;
     private $users;
-
-    public function __construct(EntityManagerInterface $em)
-    {
-        $this->em = $em;
-    }
 
     public function nextIdentity()
     {
@@ -31,21 +25,21 @@ class UserCaseRepository extends EntityRepository implements UserRepositoryInter
     public function findAll()
     {
         // TODO: Implement findAll() method.
-        $query = $this->em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u');
+        $query = $this->_em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u');
         return $query->getResult();
     }
 
     public function add(User $user)
     {
         // TODO: Implement add() method.
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->_em->persist($user);
+        $this->_em->flush();
     }
 
     public function findByEmail(Email $email)
     {
         // TODO: Implement findByEmail() method.
-        $query = $this->em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.email.email = :email');
+        $query = $this->_em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.email.email = :email');
         $query->setParameter('email', $email->getEmail());
         $user = $query->getResult();
         return $user == null ? false : new User($user[0]->getUserId(), $user[0]->getName(), $user[0]->getEmail(), null, $user[0]->getHashCode());
@@ -54,7 +48,7 @@ class UserCaseRepository extends EntityRepository implements UserRepositoryInter
     public function findByUsername($username)
     {
         // TODO: Implement findByUsername() method.
-        $query = $this->em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.name = :namee');
+        $query = $this->_em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.name = :namee');
         $query->setParameter('namee', $username);
         $user = $query->getResult();
         return $user == null ? false : new User($user[0]->getUserId(), $user[0]->getName(), $user[0]->getEmail(), null, $user[0]->getHashCode());
@@ -63,14 +57,14 @@ class UserCaseRepository extends EntityRepository implements UserRepositoryInter
     public function update()
     {
         // TODO: Implement update() method.
-        $this->em->flush();
+        $this->_em->flush();
     }
 
     public function remove(User $user)
     {
         // TODO: Implement remove() method.
-        $this->em->remove($user);
-        $this->em->flush();
+        $this->_em->remove($user);
+        $this->_em->flush();
     }
 
 }
