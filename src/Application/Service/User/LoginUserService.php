@@ -28,10 +28,7 @@ class LoginUserService implements ApplicationServiceInterface
         if (!empty($user) && $user->validate($password)) {
 
             $this->session->start();
-            $this->session->set('id', $user->getUserId());
-            $this->session->set('username', $user->getName());
-            $this->session->set('email', $user->getEmail());
-            $this->session->save();
+            $this->session->set('user', array('id' => $user->getUserId(), 'username' => $user->getName(), 'email' => $user->getEmail()));
             return true;
         } else {
             return false;

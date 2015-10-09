@@ -12,32 +12,24 @@ $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
 
 // Register routes
 $app->get('/', function () use ($app) {
-    return new Response($app['twig']->render('login.html', ['formError' => false]), 200);
-})->bind('homepage');
+    if (null === $app['session']->get('user')) {
+        return $app->redirect($app["url_generator"]->generate("login"));
+    }
+    return $app->redirect($app["url_generator"]->generate("calendar"));
+});
 
 $app->get('/login', function () use ($app) {
     return new Response($app['twig']->render('login.html', ['formError' => false]), 200);
-});
-
-$app->get('/calendar', function () use ($app) {
-    var_dump($app['session']->get('username'));
-    return new Response($app['twig']->render('calendar.html'), 200);
-})->bind('calendar');
-
-$app->post('/', function (Request $request) use ($app) {
-
-    $success = (new \Malendar\Application\Service\User\LoginUserService($app['user_repository'], $app['session']))->execute($request);
-
-    if ($success) {
-        return $app->redirect($app["url_generator"]->generate("calendar"));
-    } else {
-        return new Response($app['twig']->render('login.html', ['formError' => true]), 400);
-    }
-});
+})->bind('login');
 
 $app->post('/login', function (Request $request) use ($app) {
 
-    $success = (new \Malendar\Application\Service\User\LoginUserService($app['user_repository'], $app['session']))->execute($request);
+    $userRepository = $app['user_repository'];
+    $session = $app['session'];
+
+    $loginService = new \Malendar\Application\Service\User\LoginUserService($userRepository, $session);
+
+    $success = $loginService->execute($request);
 
     if ($success) {
         return $app->redirect($app["url_generator"]->generate("calendar"));
@@ -45,6 +37,22 @@ $app->post('/login', function (Request $request) use ($app) {
         return new Response($app['twig']->render('login.html', ['formError' => true]), 400);
     }
 });
+
+$app->get('/logout', function (Request $request) use ($app){
+
+    $session = $app['session'];
+    $logoutService = new \Malendar\Application\Service\User\LogoutUserService($session);
+
+    $logoutService->execute($request);
+
+    return $app->redirect($app["url_generator"]->generate("login"));
+
+})->bind('logout');
+
+$app->get('/calendar', function () use ($app) {
+    return new Response($app['twig']->render('calendar.html'), 200);
+})->bind('calendar');
+
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
