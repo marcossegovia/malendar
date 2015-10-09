@@ -15,7 +15,7 @@ class Application
     public static function boostrap()
     {
         $app = new \Silex\Application();
-
+        //$app['debug'] = true;
         //Providers
         $app->register(new UrlGeneratorServiceProvider());
         $app->register(new ValidatorServiceProvider());

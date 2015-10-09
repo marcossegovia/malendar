@@ -20,12 +20,14 @@ $app->get('/login', function () use ($app) {
 });
 
 $app->get('/calendar', function () use ($app) {
+    var_dump($app['session']->get('username'));
     return new Response($app['twig']->render('calendar.html'), 200);
 })->bind('calendar');
 
 $app->post('/', function (Request $request) use ($app) {
 
-    $success = (new \Malendar\Application\Service\User\LoginUserService($app))->execute($request);
+    $success = (new \Malendar\Application\Service\User\LoginUserService($app['user_repository'], $app['session']))->execute($request);
+
     if ($success) {
         return $app->redirect($app["url_generator"]->generate("calendar"));
     } else {
@@ -33,13 +35,11 @@ $app->post('/', function (Request $request) use ($app) {
     }
 });
 
-$app->post('/login', function () use ($app) {
-    //missing loginService
-    $userName = $app['request']->get('user');
-    $password = $app['request']->get('password');
-    $userRepository = $app['user_repository'];
-    $user = $userRepository->findByUsername($userName);
-    if (!empty($user) && $user->validate($password)) {
+$app->post('/login', function (Request $request) use ($app) {
+
+    $success = (new \Malendar\Application\Service\User\LoginUserService($app['user_repository'], $app['session']))->execute($request);
+
+    if ($success) {
         return $app->redirect($app["url_generator"]->generate("calendar"));
     } else {
         return new Response($app['twig']->render('login.html', ['formError' => true]), 400);

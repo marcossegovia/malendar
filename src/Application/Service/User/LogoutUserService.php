@@ -3,7 +3,7 @@
 
 namespace Malendar\Application\Service\User;
 
-use Malendar\Application\ServiceInterface\ApplicationServiceInterface;
+use Malendar\Application\Service\ApplicationServiceInterface;
 
 class LogoutUserService implements ApplicationServiceInterface
 {

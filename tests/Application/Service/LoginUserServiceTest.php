@@ -15,12 +15,15 @@ class LoginUserServiceTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $app['session.test'] = true;
         $app['session.storage'] = new MockArraySessionStorage();
-        $loginService = new LoginUserService($app);
+        $loginService = new LoginUserService($app['user_repository'], $app['session']);
         $id = $app['user_repository']->nextIdentity();
         $user = new User($id, 'Auron', new Email('auron@gmail.com'), '1234');
         $app['user_repository']->add($user);
+
         $loginService->execute(Request::create('POST', '/', array('form' => array('user' => 'Auron', 'password' => '1234'))));
-        var_dump($app['session']->get('username'));
+
+        //$app['session']->set('id', $user->getUserId());
+        //var_dump($app['session']);
         $this->assertEquals($id, $app['session']->get('id'));
 
         $app['user_repository']->remove($user);
