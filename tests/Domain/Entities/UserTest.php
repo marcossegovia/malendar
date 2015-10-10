@@ -3,9 +3,9 @@
 
 namespace Malendar\Tests\Domain\Entities;
 
-use Malendar\Domain\Entities\User\User;
-use Malendar\Domain\Entities\ValueObject\Email;
-use Malendar\Infrastructure\Persistence\UserCaseRepository;
+use Malendar\Infrastructure\Factory\EmailFactory;
+use Malendar\Infrastructure\Factory\UserFactory;
+use Malendar\Infrastructure\Factory\UserIdFactory;
 use Silex\Application;
 use Silex\Provider\ValidatorServiceProvider;
 
@@ -15,8 +15,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
-        $email = new Email('pablo@gmail.com');
-        $user = new User($repository->nextIdentity(), 'Pablo', $email, '1234');
+        $email = EmailFactory::create('pablo@gmail.com');
+        $user = UserFactory::create(UserIdFactory::create(), 'Pablo', $email, '1234');
         $this->assertEquals('Pablo', $user->getName());
         $this->assertEquals('pablo@gmail.com', $user->getEmail());
     }
@@ -25,8 +25,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
-        $email = new Email('pablo@gmail.com');
-        $user = new User($repository->nextIdentity(), 'Pablo', $email, '1234');
+        $email = EmailFactory::create('pablo@gmail.com');
+        $user = UserFactory::create(UserIdFactory::create(), 'Pablo', $email, '1234');
         $this->assertTrue($user->validate('1234'));
     }
 
@@ -34,7 +34,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $app = new Application();
         $app->register(new ValidatorServiceProvider());
-        $email = new Email('pablo@gmail.com');
+        $email = EmailFactory::create('pablo@gmail.com');
         $this->assertTrue($email->validate($app));
     }
 }

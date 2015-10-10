@@ -1,13 +1,11 @@
 <?php
 
-namespace Malendar\Domain\Entities\Repository;
+namespace Malendar\Domain\Entities\User;
 
 use Malendar\Domain\Entities\ValueObject\Email;
-use Malendar\Domain\Entities\User\User;
 
 interface UserRepositoryInterface
 {
-    public function nextIdentity();
     public function add(User $user);
     public function findAll();
     public function findByEmail(Email $mail);

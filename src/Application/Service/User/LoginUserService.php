@@ -4,7 +4,7 @@
 namespace Malendar\Application\Service\User;
 
 use Malendar\Application\Service\ApplicationServiceInterface;
-use Malendar\Domain\Entities\Repository\UserRepositoryInterface;
+use Malendar\Domain\Entities\User\UserRepositoryInterface;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Session\Session;
 

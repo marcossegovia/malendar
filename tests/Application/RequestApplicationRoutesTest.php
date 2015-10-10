@@ -20,7 +20,7 @@ class RequestApplicationRoutesTest extends WebTestCase
     public function testHello()
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/login');
         $this->assertTrue($client->getResponse()->isOk());
         $this->assertTrue($crawler->filter('form')->count() > 0);
     }

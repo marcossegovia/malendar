@@ -2,10 +2,10 @@
 
 namespace Malendar\Tests\Infrastructure\Persistence;
 
-use Malendar\Infrastructure\Persistence\UserCaseRepository;
+use Malendar\Infrastructure\Factory\EmailFactory;
+use Malendar\Infrastructure\Factory\UserFactory;
+use Malendar\Infrastructure\Factory\UserIdFactory;
 use Silex\Application;
-use Malendar\Domain\Entities\ValueObject\Email;
-use Malendar\Domain\Entities\User\User;
 
 class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,15 +13,14 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
-        $this->assertInstanceOf('Malendar\Domain\Entities\ValueObject\UserId', $repository->nextIdentity());
+        $this->assertInstanceOf('Malendar\Domain\Entities\ValueObject\UserId', UserIdFactory::create());
     }
 
     public function testUserPersistance()
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
-
-        $user = new User($repository->nextIdentity(), 'Pablo', new Email('pablo@gmail.com'), '12745');
+        $user = UserFactory::create(UserIdFactory::create(), 'Pablo', EmailFactory::create('pablo@gmail.com'), '12745');
         $repository->add($user);
 
         $user = $repository->find($user->getUserId());
@@ -35,9 +34,9 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $user1 = new User($repository->nextIdentity(), 'Marcos', new Email('marcos@gmail.com'), '1234');
+        $user1 = UserFactory::create(UserIdFactory::create(), 'Marcos', EmailFactory::create('marcos@gmail.com'), '1234');
         $repository->add($user1);
-        $user2 = new User($repository->nextIdentity(), 'David', new Email('david@gmail.com'), '5678');
+        $user2 = UserFactory::create(UserIdFactory::create(), 'David', EmailFactory::create('david@gmail.com'), '5678');
         $repository->add($user2);
 
         $users = $repository->findAll();
@@ -52,8 +51,9 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userId = $repository->nextIdentity();
-        $user = new User($userId, 'Juan', new Email('juan@gmail.com'), 'juanito123');
+        $userId = UserIdFactory::create();
+
+        $user = UserFactory::create($userId, 'Juan', EmailFactory::create('juan@gmail.com'), 'juanito123');
 
         $repository->add($user);
 
@@ -68,11 +68,11 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userSent = new User($repository->nextIdentity(), 'troll', new Email('troll@gmail.com'), 'troll123');
+        $userSent = UserFactory::create(UserIdFactory::create(), 'troll', EmailFactory::create('troll@gmail.com'), 'troll123');
 
         $repository->add($userSent);
 
-        $userReceived = $repository->findByEmail(new Email('troll@gmail.com'));
+        $userReceived = $repository->findByEmail(EmailFactory::create('troll@gmail.com'));
         $this->assertTrue($userSent->equals($userReceived));
 
         $repository->remove($userSent);
@@ -84,7 +84,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userSent = new User($repository->nextIdentity(), 'genius', new Email('genius@gmail.com'), 'genius123');
+        $userSent = UserFactory::create(UserIdFactory::create(), 'genius', EmailFactory::create('genius@gmail.com'), 'genius123');
 
         $repository->add($userSent);
 
@@ -100,16 +100,16 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userSent = new User($repository->nextIdentity(), 'Paco', new Email('paco@gmail.com'), 'paco123');
+        $userSent = UserFactory::create(UserIdFactory::create(), 'Paco', EmailFactory::create('paco@gmail.com'), 'paco123');
 
         $repository->add($userSent);
 
-        $user1 = $repository->findByEmail(new Email('paco@gmail.com'));
+        $user1 = $repository->findByEmail(EmailFactory::create('paco@gmail.com'));
         $this->assertFalse(empty($user1));
 
         $repository->remove($userSent);
 
-        $user2 = $repository->findByEmail(new Email('paco@gmail.com'));
+        $user2 = $repository->findByEmail(EmailFactory::create('paco@gmail.com'));
         $this->assertTrue(empty($user2));
     }
 
@@ -118,7 +118,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userSent = new User($repository->nextIdentity(), 'Marcos', new Email('marcos@gmail.com'), 'marcos123');
+        $userSent = UserFactory::create(UserIdFactory::create(), 'Marcos', EmailFactory::create('marcos@gmail.com'), 'marcos123');
 
         $repository->add($userSent);
 
