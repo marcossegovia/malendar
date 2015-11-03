@@ -14,8 +14,7 @@ Malendar\Domain\Entities\Master\Master:
       type: string
       length: 255
     description:
-      type: string
-      length: 500
+      type: text
   oneToMany:
       courses:
         targetEntity: Malendar\Domain\Entities\Course\Course
