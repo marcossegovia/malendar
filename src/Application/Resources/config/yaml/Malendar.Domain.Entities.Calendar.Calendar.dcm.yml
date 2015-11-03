@@ -1,0 +1,15 @@
+Malendar\Domain\Entities\Calendar\Calendar:
+  type: entity
+  table: calendar
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  oneToOne:
+      course:
+        targetEntity: Malendar\Domain\Entities\Course\Course
+        inversedBy: calendar
+        joinColumn:
+          name: calendar_id
+          referencedColumnName: id

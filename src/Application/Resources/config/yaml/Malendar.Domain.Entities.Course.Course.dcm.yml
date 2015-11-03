@@ -20,3 +20,7 @@ Malendar\Domain\Entities\Course\Course:
       joinColumn:
         name: master_id
         referencedColumnName: id
+  oneToOne:
+    calendar:
+      targetEntity: Malendar\Domain\Entities\Calendar\Calendar
+      mappedBy: course
