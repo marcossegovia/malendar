@@ -1,5 +1,6 @@
 Malendar\Domain\Entities\Master\Master:
   type: entity
+  table: master
   id:
     id:
       type: integer
@@ -17,5 +18,5 @@ Malendar\Domain\Entities\Master\Master:
       length: 500
   oneToMany:
       courses:
-        targetEntity: Course
+        targetEntity: Malendar\Domain\Entities\Course\Course
         mappedBy: master

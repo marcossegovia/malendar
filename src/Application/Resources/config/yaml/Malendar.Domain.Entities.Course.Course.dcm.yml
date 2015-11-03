@@ -1,5 +1,6 @@
 Malendar\Domain\Entities\Course\Course:
   type: entity
+  table: course
   id:
     id:
       type: integer
@@ -14,7 +15,7 @@ Malendar\Domain\Entities\Course\Course:
       type: simple_array
   manyToOne:
     master:
-      targetEntity: Master
+      targetEntity: Malendar\Domain\Entities\Master\Master
       inversedBy: courses
       joinColumn:
         name: master_id
