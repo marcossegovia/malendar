@@ -7,7 +7,7 @@ namespace Malendar\Domain\Entities\Master;
 class Master
 {
     /**
-     * @var int
+     * @var integer
      */
     private $id;
 
@@ -22,7 +22,7 @@ class Master
     private $acronym;
 
     /**
-     * @var text
+     * @var string
      */
     private $description;
 

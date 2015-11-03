@@ -11,5 +11,5 @@ Malendar\Domain\Entities\Calendar\Calendar:
         targetEntity: Malendar\Domain\Entities\Course\Course
         inversedBy: calendar
         joinColumn:
-          name: calendar_id
+          name: course_id
           referencedColumnName: id
