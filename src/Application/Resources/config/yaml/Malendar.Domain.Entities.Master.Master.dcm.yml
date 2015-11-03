@@ -1,0 +1,21 @@
+Malendar\Domain\Entities\Master\Master:
+  type: entity
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 255
+    acronym:
+      type: string
+      length: 255
+    description:
+      type: string
+      length: 500
+  oneToMany:
+      courses:
+        targetEntity: Course
+        mappedBy: master

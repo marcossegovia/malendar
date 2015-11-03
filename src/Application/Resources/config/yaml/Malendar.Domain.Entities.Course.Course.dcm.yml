@@ -1,0 +1,21 @@
+Malendar\Domain\Entities\Course\Course:
+  type: entity
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    date_start:
+      type: datetime
+    date_end:
+      type: datetime
+    class_days:
+      type: simple_array
+  manyToOne:
+    master:
+      targetEntity: Master
+      inversedBy: courses
+      joinColumn:
+        name: master_id
+        referencedColumnName: id
