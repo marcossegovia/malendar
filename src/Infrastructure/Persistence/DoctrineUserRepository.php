@@ -9,7 +9,7 @@ use Malendar\Domain\Entities\ValueObject\Email;
 use Malendar\Domain\Entities\User\User;
 use Malendar\Infrastructure\Factory\UserFactory;
 
-class UserCaseRepository extends EntityRepository implements UserRepositoryInterface
+class DoctrineUserRepository extends EntityRepository implements UserRepositoryInterface
 {
     private $users;
 

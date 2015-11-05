@@ -1,6 +1,6 @@
 Malendar\Domain\Entities\User\User:
   type: entity
-  repositoryClass: Malendar\Infrastructure\Persistence\UserCaseRepository
+  repositoryClass: Malendar\Infrastructure\Persistence\DoctrineUserRepository
   table: user
   embedded:
     uuid:
