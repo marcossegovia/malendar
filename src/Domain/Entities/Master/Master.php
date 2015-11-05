@@ -26,6 +26,9 @@ class Master
      */
     private $description;
 
+    /**
+     * @var array
+     */
     private $courses;
 
     public function __construct()

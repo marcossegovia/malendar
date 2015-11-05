@@ -10,9 +10,24 @@ use Malendar\Domain\Entities\ValueObject\Email;
 
 class User
 {
+    /**
+     * @var UserId
+     */
     private $uuid;
+
+    /**
+     * @var string
+     */
     private $name;
+
+    /**
+     * @var Email
+     */
     private $email;
+
+    /**
+     * @var string
+     */
     private $hashCode;
 
 
