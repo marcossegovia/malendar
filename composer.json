@@ -31,7 +31,8 @@
         "symfony/validator": "~2.3",
         "ramsey/uuid": "~2.8",
         "doctrine/dbal":"~2.5",
-        "dflydev/doctrine-orm-service-provider": "1.0.7"
+        "dflydev/doctrine-orm-service-provider": "1.0.7",
+        "simple-bus/message-bus": "dev-master"
     },
     "autoload": {
         "psr-4": { "Malendar\\": "src/" }

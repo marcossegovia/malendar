@@ -10,6 +10,14 @@ use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
 
+use SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext;
+use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
+use SimpleBus\Message\CallableResolver\CallableMap;
+use SimpleBus\Message\CallableResolver\ServiceLocatorAwareCallableResolver;
+use SimpleBus\Message\Handler\DelegatesToMessageHandlerMiddleware;
+use SimpleBus\Message\Handler\Resolver\NameBasedMessageHandlerResolver;
+use SimpleBus\Message\Name\ClassBasedNameResolver;
+
 class Application
 {
     public static function boostrap()
@@ -51,6 +59,44 @@ class Application
         ));
 
         //Services
+
+        $app['commandBus'] = $app->share(function (){
+
+            //Instantiation of CommandBus
+            $commandBus = new MessageBusSupportingMiddleware();
+            //Commands are always fully handled before other commands will be handled
+            $commandBus->appendMiddleware(new FinishesHandlingMessageBeforeHandlingNext());
+
+            $commandHandlersByCommandName = [
+                // the "command_handler_service_id" service will be resolved when needed (see below)
+                'Fully\Qualified\Class\Name\Of\Command' => ['command_handler_service_id', 'handle']
+            ];
+            $serviceLocator = function ($serviceId) {
+                $handler = ...;
+
+                return $handler;
+            }
+            $commandHandlerMap = new CallableMap(
+                $commandHandlersByCommandName,
+                new ServiceLocatorAwareCallableResolver($serviceLocator)
+            );
+
+            $commandNameResolver = new ClassBasedNameResolver();
+
+            $commandHandlerResolver = new NameBasedMessageHandlerResolver(
+                $commandNameResolver,
+                $commandHandlerMap
+            );
+
+            // We append to our CommandBus the resolver in order to attach Command to CommandHandler
+            $commandBus->appendMiddleware(
+                new DelegatesToMessageHandlerMiddleware(
+                    $commandHandlerResolver
+                )
+            );
+
+            return $commandBus;
+        });
 
 
         $app['user_repository'] = $app->share(function ($app) {
