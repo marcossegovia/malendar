@@ -22,11 +22,6 @@ class LoginUserService implements ApplicationServiceInterface
     {
         // TODO: Implement execute() method.
         $command = new LoginUserCommand($request->get('user'), $request->get('password'));
-        try {
-            $this->commandBus->handle($command);
-        } catch (Exception $e) {
-            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
-        }
-
+        $this->commandBus->handle($command);
     }
 }

@@ -24,20 +24,15 @@ $app->get('/login', function () use ($app) {
 
 $app->post('/login', function (Request $request) use ($app) {
 
-    $userRepository = $app['user_repository'];
-    $session = $app['session'];
     $commandBus = $app['commandBus'];
 
-    $loginService = new \Malendar\Application\Service\User\LoginUserService($commandBus);
-    $loginService->execute($request);
-    return new Response($app['twig']->render('calendar.html'), 200);
-
-    /*
-        if ($success) {
-            return $app->redirect($app["url_generator"]->generate("calendar"));
-        } else {
-            return new Response($app['twig']->render('login.html', ['formError' => true]), 400);
-        }*/
+    try{
+        $loginService = new \Malendar\Application\Service\User\LoginUserService($commandBus);
+        $loginService->execute($request);
+    } catch (Exception $e) {
+        return new Response($app['twig']->render('login.html', ['formError' => true]), 400);
+    }
+    return $app->redirect($app["url_generator"]->generate("calendar"));
 });
 
 $app->get('/logout', function (Request $request) use ($app){
