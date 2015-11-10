@@ -60,7 +60,16 @@ class Application
 
         //Services
 
-        $app['commandBus'] = $app->share(function (){
+        $app['user_repository'] = $app->share(function ($app) {
+            return $app['orm.em']->getRepository('Malendar\Domain\Entities\User\User');
+        });
+
+        //Command Handlers
+        $app['LoginUserCommandHandler'] = $app->share(function ($app) {
+            return new \Malendar\Application\User\LoginUserCommandHandler($app['user_repository'], $app['session']);
+        });
+
+        $app['commandBus'] = $app->share(function ($app){
 
             //Instantiation of CommandBus
             $commandBus = new MessageBusSupportingMiddleware();
@@ -69,13 +78,13 @@ class Application
 
             $commandHandlersByCommandName = [
                 // the "command_handler_service_id" service will be resolved when needed (see below)
-                'Fully\Qualified\Class\Name\Of\Command' => ['command_handler_service_id', 'handle']
+                'Malendar\Application\User\LoginUserCommand' => ['LoginUserCommandHandler', 'handle']
             ];
-            $serviceLocator = function ($serviceId) {
-                $handler = ...;
 
-                return $handler;
-            }
+            $serviceLocator = function ($serviceId) use ($app) {
+                return $app[$serviceId];
+            };
+
             $commandHandlerMap = new CallableMap(
                 $commandHandlersByCommandName,
                 new ServiceLocatorAwareCallableResolver($serviceLocator)
@@ -96,11 +105,6 @@ class Application
             );
 
             return $commandBus;
-        });
-
-
-        $app['user_repository'] = $app->share(function ($app) {
-            return $app['orm.em']->getRepository('Malendar\Domain\Entities\User\User');
         });
 
         $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {

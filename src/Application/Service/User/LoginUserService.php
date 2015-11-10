@@ -3,35 +3,30 @@
 
 namespace Malendar\Application\Service\User;
 
+use Exception;
 use Malendar\Application\Service\ApplicationServiceInterface;
-use Malendar\Domain\Entities\User\UserRepositoryInterface;
+use Malendar\Application\User\LoginUserCommand;
 use Silex\Application;
-use Symfony\Component\HttpFoundation\Session\Session;
+use SimpleBus\Message\Bus\MessageBus;
 
 class LoginUserService implements ApplicationServiceInterface
 {
-    private $userRepository;
-    private $session;
+    private $commandBus;
 
-    public function __construct(UserRepositoryInterface $userRepository, Session $session)
+    public function __construct(MessageBus $commandBus)
     {
-        $this->userRepository = $userRepository;
-        $this->session = $session;
+        $this->commandBus = $commandBus;
     }
 
     public function execute($request = null)
     {
         // TODO: Implement execute() method.
-        $userName = $request->get('user');
-        $password = $request->get('password');
-        $user = $this->userRepository->findByUsername($userName);
-        if (!empty($user) && $user->validate($password)) {
-
-            $this->session->start();
-            $this->session->set('user', array('id' => $user->getUserId(), 'username' => $user->getName(), 'email' => $user->getEmail()));
-            return true;
-        } else {
-            return false;
+        $command = new LoginUserCommand($request->get('user'), $request->get('password'));
+        try {
+            $this->commandBus->handle($command);
+        } catch (Exception $e) {
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
         }
+
     }
 }

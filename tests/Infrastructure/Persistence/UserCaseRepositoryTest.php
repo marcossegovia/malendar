@@ -12,7 +12,6 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testNextUserIdReturnsUserId()
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
-        $repository = $app['user_repository'];
         $this->assertInstanceOf('Malendar\Domain\Entities\ValueObject\UserId', UserIdFactory::create());
     }
 

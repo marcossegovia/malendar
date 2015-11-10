@@ -1,7 +1,7 @@
 /*!
- * FullCalendar v2.4.0 Print Stylesheet
- * Docs & License: http://fullcalendar.io/
- * (c) 2015 Adam Shaw
+ * FullCalendar v2.2.7 Print Stylesheet
+ * Docs & License: http://arshaw.com/fullcalendar/
+ * (c) 2013 Adam Shaw
  */
 
 /*
@@ -199,4 +199,16 @@ tbody,
 .fc-button-group,
 .fc button {
 	display: none; /* don't display any button-related controls */
+}
+
+/* Year View
+--------------------------------------------------------------------------------------------------*/
+
+a.fc-year-monthly-name {
+	color: black;
+	text-decoration: none;
+}
+
+span.fc-button {
+	display: none;
 }

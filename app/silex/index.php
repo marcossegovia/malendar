@@ -26,16 +26,18 @@ $app->post('/login', function (Request $request) use ($app) {
 
     $userRepository = $app['user_repository'];
     $session = $app['session'];
+    $commandBus = $app['commandBus'];
 
-    $loginService = new \Malendar\Application\Service\User\LoginUserService($userRepository, $session);
+    $loginService = new \Malendar\Application\Service\User\LoginUserService($commandBus);
+    $loginService->execute($request);
+    return new Response($app['twig']->render('calendar.html'), 200);
 
-    $success = $loginService->execute($request);
-
-    if ($success) {
-        return $app->redirect($app["url_generator"]->generate("calendar"));
-    } else {
-        return new Response($app['twig']->render('login.html', ['formError' => true]), 400);
-    }
+    /*
+        if ($success) {
+            return $app->redirect($app["url_generator"]->generate("calendar"));
+        } else {
+            return new Response($app['twig']->render('login.html', ['formError' => true]), 400);
+        }*/
 });
 
 $app->get('/logout', function (Request $request) use ($app){
