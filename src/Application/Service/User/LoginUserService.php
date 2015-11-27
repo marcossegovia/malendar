@@ -3,7 +3,6 @@
 
 namespace Malendar\Application\Service\User;
 
-use Exception;
 use Malendar\Application\Service\ApplicationServiceInterface;
 use Malendar\Application\User\LoginUserCommand;
 use Silex\Application;
