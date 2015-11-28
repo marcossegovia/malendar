@@ -11,7 +11,6 @@ use Malendar\Infrastructure\Factory\UserFactory;
 
 class DoctrineUserRepository extends EntityRepository implements UserRepositoryInterface
 {
-    private $users;
 
     const NO_USER_FOUND = false;
 
@@ -20,6 +19,11 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
         // TODO: Implement add() method.
         $this->_em->persist($user);
         $this->_em->flush();
+    }
+
+    public function findAll()
+    {
+        return $this->_em->findAll();
     }
 
     public function findByEmail(Email $email)

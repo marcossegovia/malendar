@@ -17,7 +17,14 @@ Malendar\Domain\Entities\User\User:
       type: string
     admin:
       type: boolean
-  oneToMany:
+  manyToMany:
     masters:
       targetEntity: Malendar\Domain\Entities\Master\Master
-      mappedBy: user
+      joinTable:
+        name: users_masters
+        joinColumns:
+          user_id:
+            referencedColumnName: uuid
+        inverseJoinColumns:
+          master_id:
+            referencedColumnName: id

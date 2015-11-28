@@ -29,7 +29,7 @@ class Master
     /**
      * @var User
      */
-    private $user;
+    private $users;
 
     /**
      * @var array
