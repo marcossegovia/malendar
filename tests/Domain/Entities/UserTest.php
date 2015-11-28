@@ -16,7 +16,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
         $email = EmailFactory::create('pablo@gmail.com');
-        $user = UserFactory::create(UserIdFactory::create(), 'Pablo', $email, '1234');
+        $user = UserFactory::create(UserIdFactory::create(), 'Pablo', $email, false, '1234');
         $this->assertEquals('Pablo', $user->getName());
         $this->assertEquals('pablo@gmail.com', $user->getEmail());
     }
@@ -26,7 +26,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
         $email = EmailFactory::create('pablo@gmail.com');
-        $user = UserFactory::create(UserIdFactory::create(), 'Pablo', $email, '1234');
+        $user = UserFactory::create(UserIdFactory::create(), 'Pablo', $email, false, '1234');
         $this->assertTrue($user->validate('1234'));
     }
 

@@ -13,6 +13,8 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
 {
     private $users;
 
+    const NO_USER_FOUND = false;
+
     public function add(User $user)
     {
         // TODO: Implement add() method.
@@ -26,8 +28,8 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
         $query = $this->_em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.email.email = :email');
         $query->setParameter('email', $email->getEmail());
         $user = $query->getResult();
-        return $user == null ? false : UserFactory::create($user[0]->getUserId(), $user[0]->getName(),
-            $user[0]->getEmail(), null, $user[0]->getHashCode());
+        return $user == null ? self::NO_USER_FOUND : UserFactory::create($user[0]->getUserId(), $user[0]->getName(),
+            $user[0]->getEmail(), $user[0]->admin(), null, $user[0]->getHashCode());
     }
 
     public function findByUsername($username)
@@ -36,8 +38,8 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
         $query = $this->_em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.name = :namee');
         $query->setParameter('namee', $username);
         $user = $query->getResult();
-        return $user == null ? false : UserFactory::create($user[0]->getUserId(), $user[0]->getName(),
-            $user[0]->getEmail(), null, $user[0]->getHashCode());
+        return $user == null ? self::NO_USER_FOUND : UserFactory::create($user[0]->getUserId(), $user[0]->getName(),
+            $user[0]->getEmail(), $user[0]->admin(), null, $user[0]->getHashCode());
     }
 
     public function update()

@@ -30,14 +30,24 @@ class User
      */
     private $hashCode;
 
+    /**
+     * @var boolean
+     */
+    private $admin;
 
-    public function __construct(UserId $uuid, $name, Email $email, $password = null, $hashCode = null)
+    /**
+     * @var Master
+     */
+    private $masters;
+
+    public function __construct(UserId $uuid, $name, Email $email, $admin = false, $password = null, $hashCode = null)
     {
         $this->uuid = $uuid;
         $this->name = $name;
         $this->email = $email;
+        $this->admin = $admin;
 
-        if ($password == null) {
+        if ($password === null) {
             $this->hashCode = $hashCode;
         } else {
             $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
@@ -87,5 +97,10 @@ class User
     public function setUsername($username)
     {
         $this->name = $username;
+    }
+
+    public function admin()
+    {
+        return $this->admin;
     }
 }

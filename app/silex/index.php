@@ -26,7 +26,7 @@ $app->post('/login', function (Request $request) use ($app) {
 
     $commandBus = $app['commandBus'];
 
-    try{
+    try {
         $loginService = new \Malendar\Application\Service\User\LoginUserService($commandBus);
         $loginService->execute($request);
     } catch (Exception $e) {
@@ -35,7 +35,7 @@ $app->post('/login', function (Request $request) use ($app) {
     return $app->redirect($app["url_generator"]->generate("calendar"));
 });
 
-$app->get('/logout', function (Request $request) use ($app){
+$app->get('/logout', function (Request $request) use ($app) {
 
     $session = $app['session'];
     $logoutService = new \Malendar\Application\Service\User\LogoutUserService($session);
@@ -47,6 +47,9 @@ $app->get('/logout', function (Request $request) use ($app){
 })->bind('logout');
 
 $app->get('/calendar', function () use ($app) {
+    if (null === $app['session']->get('user')) {
+        return $app->redirect($app["url_generator"]->generate("login"));
+    }
     return new Response($app['twig']->render('calendar.html'), 200);
 })->bind('calendar');
 

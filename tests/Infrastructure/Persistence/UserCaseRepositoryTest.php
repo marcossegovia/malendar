@@ -19,7 +19,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
-        $user = UserFactory::create(UserIdFactory::create(), 'Pablo', EmailFactory::create('pablo@gmail.com'), '12745');
+        $user = UserFactory::create(UserIdFactory::create(), 'Pablo', EmailFactory::create('pablo@gmail.com'), false, '12745');
         $repository->add($user);
 
         $user = $repository->find($user->getUserId());
@@ -33,9 +33,9 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $user1 = UserFactory::create(UserIdFactory::create(), 'Marcos', EmailFactory::create('marcos@gmail.com'), '1234');
+        $user1 = UserFactory::create(UserIdFactory::create(), 'Marcos', EmailFactory::create('marcos@gmail.com'), false, '1234');
         $repository->add($user1);
-        $user2 = UserFactory::create(UserIdFactory::create(), 'David', EmailFactory::create('david@gmail.com'), '5678');
+        $user2 = UserFactory::create(UserIdFactory::create(), 'David', EmailFactory::create('david@gmail.com'), false, '5678');
         $repository->add($user2);
 
         $users = $repository->findAll();
@@ -52,7 +52,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $userId = UserIdFactory::create();
 
-        $user = UserFactory::create($userId, 'Juan', EmailFactory::create('juan@gmail.com'), 'juanito123');
+        $user = UserFactory::create($userId, 'Juan', EmailFactory::create('juan@gmail.com'), false, 'juanito123');
 
         $repository->add($user);
 
@@ -67,7 +67,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userSent = UserFactory::create(UserIdFactory::create(), 'troll', EmailFactory::create('troll@gmail.com'), 'troll123');
+        $userSent = UserFactory::create(UserIdFactory::create(), 'troll', EmailFactory::create('troll@gmail.com'), false, 'troll123');
 
         $repository->add($userSent);
 
@@ -83,7 +83,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userSent = UserFactory::create(UserIdFactory::create(), 'genius', EmailFactory::create('genius@gmail.com'), 'genius123');
+        $userSent = UserFactory::create(UserIdFactory::create(), 'genius', EmailFactory::create('genius@gmail.com'), false, 'genius123');
 
         $repository->add($userSent);
 
@@ -99,7 +99,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userSent = UserFactory::create(UserIdFactory::create(), 'Paco', EmailFactory::create('paco@gmail.com'), 'paco123');
+        $userSent = UserFactory::create(UserIdFactory::create(), 'Paco', EmailFactory::create('paco@gmail.com'), false, 'paco123');
 
         $repository->add($userSent);
 
@@ -117,7 +117,7 @@ class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userSent = UserFactory::create(UserIdFactory::create(), 'Marcos', EmailFactory::create('marcos@gmail.com'), 'marcos123');
+        $userSent = UserFactory::create(UserIdFactory::create(), 'Marcos', EmailFactory::create('marcos@gmail.com'), false, 'marcos123');
 
         $repository->add($userSent);
 

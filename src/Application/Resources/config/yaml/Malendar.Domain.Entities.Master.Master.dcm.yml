@@ -15,7 +15,14 @@ Malendar\Domain\Entities\Master\Master:
       length: 255
     description:
       type: text
+  manyToOne:
+    user:
+      targetEntity: Malendar\Domain\Entities\User\User
+      inversedBy: masters
+      joinColumn:
+        name: user_id
+        referencedColumnName: uuid
   oneToMany:
-      courses:
-        targetEntity: Malendar\Domain\Entities\Course\Course
-        mappedBy: master
+    courses:
+      targetEntity: Malendar\Domain\Entities\Course\Course
+      mappedBy: master

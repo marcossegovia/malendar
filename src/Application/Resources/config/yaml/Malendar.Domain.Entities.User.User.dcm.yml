@@ -15,3 +15,9 @@ Malendar\Domain\Entities\User\User:
       length: 255
     hashCode:
       type: string
+    admin:
+      type: boolean
+  oneToMany:
+    masters:
+      targetEntity: Malendar\Domain\Entities\Master\Master
+      mappedBy: user

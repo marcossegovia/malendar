@@ -27,9 +27,16 @@ class Master
     private $description;
 
     /**
+     * @var User
+     */
+    private $user;
+
+    /**
      * @var array
      */
     private $courses;
+
+
 
     public function __construct()
     {
