@@ -3,34 +3,32 @@
 
 namespace Malendar\Domain\Entities\ValueObject;
 
-use Rhumsaa\Uuid\Uuid;
-
-final class UserId
+final class UuId
 {
-    private $uuid;
+    private $id;
 
     public function __construct()
     {
-        $this->uuid = Uuid::uuid4();
+        $this->id = \Rhumsaa\Uuid\Uuid::uuid4();
     }
 
     public function __toString()
     {
-        return $this->uuid->toString();
+        return $this->id->toString();
     }
 
     public function toString()
     {
-        return $this->uuid->toString();
+        return $this->id->toString();
     }
 
-    public function equals(UserId $userId)
+    public function equals(UuId $userId)
     {
         return strcmp($this->getUserId(), $userId->getUserId()) == 0;
     }
 
     public function getUserId()
     {
-        return $this->uuid;
+        return $this->id;
     }
 }

@@ -25,7 +25,7 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
         $query->setParameter('email', $email->getEmail());
         $user = $query->getResult();
         return $user == null ? self::NO_USER_FOUND : UserFactory::create($user[0]->getUserId(), $user[0]->getName(),
-            $user[0]->getEmail(), $user[0]->admin(), null, $user[0]->getHashCode());
+            $user[0]->getEmail(), $user[0]->isAdmin(), null, $user[0]->getHashCode());
     }
 
     public function findByUsername($username)
@@ -34,7 +34,7 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
         $query->setParameter('namee', $username);
         $user = $query->getResult();
         return $user == null ? self::NO_USER_FOUND : UserFactory::create($user[0]->getUserId(), $user[0]->getName(),
-            $user[0]->getEmail(), $user[0]->admin(), null, $user[0]->getHashCode());
+            $user[0]->getEmail(), $user[0]->isAdmin(), null, $user[0]->getHashCode());
     }
 
     public function update()

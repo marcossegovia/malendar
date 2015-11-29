@@ -4,22 +4,22 @@ namespace Malendar\Tests\Infrastructure\Persistence;
 
 use Malendar\Infrastructure\Factory\EmailFactory;
 use Malendar\Infrastructure\Factory\UserFactory;
-use Malendar\Infrastructure\Factory\UserIdFactory;
+use Malendar\Infrastructure\Factory\UuIdFactory;
 use Silex\Application;
 
 class DoctrineUserRepositoryTest extends \PHPUnit_Framework_TestCase
 {
-    public function testNextUserIdReturnsUserId()
+    public function testNextUserIdReturnsUuId()
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
-        $this->assertInstanceOf('Malendar\Domain\Entities\ValueObject\UserId', UserIdFactory::create());
+        $this->assertInstanceOf('Malendar\Domain\Entities\ValueObject\UuId', UuIdFactory::create());
     }
 
     public function testUserPersistance()
     {
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
-        $user = UserFactory::create(UserIdFactory::create(), 'Pablo', EmailFactory::create('pablo@gmail.com'), false, '12745');
+        $user = UserFactory::create(UuIdFactory::create(), 'Pablo', EmailFactory::create('pablo@gmail.com'), false, '12745');
         $repository->add($user);
 
         $user = $repository->find($user->getUserId());
@@ -33,9 +33,9 @@ class DoctrineUserRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $user1 = UserFactory::create(UserIdFactory::create(), 'Marcos', EmailFactory::create('marcos@gmail.com'), false, '1234');
+        $user1 = UserFactory::create(UuIdFactory::create(), 'Marcos', EmailFactory::create('marcos@gmail.com'), false, '1234');
         $repository->add($user1);
-        $user2 = UserFactory::create(UserIdFactory::create(), 'David', EmailFactory::create('david@gmail.com'), false, '5678');
+        $user2 = UserFactory::create(UuIdFactory::create(), 'David', EmailFactory::create('david@gmail.com'), false, '5678');
         $repository->add($user2);
 
         $users = $repository->findAll();
@@ -50,7 +50,7 @@ class DoctrineUserRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userId = UserIdFactory::create();
+        $userId = UuIdFactory::create();
 
         $user = UserFactory::create($userId, 'Juan', EmailFactory::create('juan@gmail.com'), false, 'juanito123');
 
@@ -67,7 +67,7 @@ class DoctrineUserRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userSent = UserFactory::create(UserIdFactory::create(), 'troll', EmailFactory::create('troll@gmail.com'), false, 'troll123');
+        $userSent = UserFactory::create(UuIdFactory::create(), 'troll', EmailFactory::create('troll@gmail.com'), false, 'troll123');
 
         $repository->add($userSent);
 
@@ -83,7 +83,7 @@ class DoctrineUserRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userSent = UserFactory::create(UserIdFactory::create(), 'genius', EmailFactory::create('genius@gmail.com'), false, 'genius123');
+        $userSent = UserFactory::create(UuIdFactory::create(), 'genius', EmailFactory::create('genius@gmail.com'), false, 'genius123');
 
         $repository->add($userSent);
 
@@ -99,7 +99,7 @@ class DoctrineUserRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userSent = UserFactory::create(UserIdFactory::create(), 'Paco', EmailFactory::create('paco@gmail.com'), false, 'paco123');
+        $userSent = UserFactory::create(UuIdFactory::create(), 'Paco', EmailFactory::create('paco@gmail.com'), false, 'paco123');
 
         $repository->add($userSent);
 
@@ -117,7 +117,7 @@ class DoctrineUserRepositoryTest extends \PHPUnit_Framework_TestCase
         $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
         $repository = $app['user_repository'];
 
-        $userSent = UserFactory::create(UserIdFactory::create(), 'Marcos', EmailFactory::create('marcos@gmail.com'), false, 'marcos123');
+        $userSent = UserFactory::create(UuIdFactory::create(), 'Marcos', EmailFactory::create('marcos@gmail.com'), false, 'marcos123');
 
         $repository->add($userSent);
 

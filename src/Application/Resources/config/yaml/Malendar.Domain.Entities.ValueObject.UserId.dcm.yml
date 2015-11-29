@@ -1,5 +1,0 @@
-Malendar\Domain\Entities\ValueObject\UserId:
-  type: embeddable
-  id:
-    uuid:
-      type:string

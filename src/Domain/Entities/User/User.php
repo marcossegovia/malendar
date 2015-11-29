@@ -4,7 +4,7 @@
 namespace Malendar\Domain\Entities\User;
 
 
-use Malendar\Domain\Entities\ValueObject\UserId;
+use Malendar\Domain\Entities\ValueObject\UuId;
 use Malendar\Domain\Entities\ValueObject\Email;
 
 
@@ -13,7 +13,7 @@ class User
     /**
      * @var UserId
      */
-    private $uuid;
+    private $id;
 
     /**
      * @var string
@@ -40,9 +40,9 @@ class User
      */
     private $masters;
 
-    public function __construct(UserId $uuid, $name, Email $email, $admin = false, $password = null, $hashCode = null)
+    public function __construct(UuId $uuid, $name, Email $email, $admin = false, $password = null, $hashCode = null)
     {
-        $this->uuid = $uuid;
+        $this->id = $uuid;
         $this->name = $name;
         $this->email = $email;
         $this->admin = $admin;
@@ -79,12 +79,12 @@ class User
 
     public function getUserId()
     {
-        return $this->uuid;
+        return $this->id;
     }
 
     public function equals(User $user)
     {
-        return $this->uuid->equals($user->getUserId());
+        return $this->id->equals($user->getUserId());
     }
 
     public function setPassword($password)
