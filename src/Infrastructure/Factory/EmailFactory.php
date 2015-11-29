@@ -12,7 +12,6 @@ class EmailFactory implements EmailFactoryInterface
 
     public static function create($email)
     {
-        // TODO: Implement create() method.
         return new Email($email);
     }
 }

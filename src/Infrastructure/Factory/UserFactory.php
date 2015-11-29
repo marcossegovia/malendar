@@ -12,7 +12,6 @@ class UserFactory implements UserFactoryInterface
 
     public static function create($uuid, $name, $email, $admin = false, $password = null, $hashCode = null)
     {
-        // TODO: Implement create() method.
         return new User($uuid, $name, $email, $admin, $password, $hashCode);
     }
 }

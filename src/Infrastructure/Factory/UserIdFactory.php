@@ -12,7 +12,6 @@ class UserIdFactory implements UserIdFactoryInterface
 
     public static function create()
     {
-        // TODO: Implement create() method.
         return new UserId();
     }
 }

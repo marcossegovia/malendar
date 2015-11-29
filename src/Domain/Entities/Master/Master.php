@@ -3,6 +3,7 @@
 
 namespace Malendar\Domain\Entities\Master;
 
+use Doctrine\Common\Collections\ArrayCollection;
 
 class Master
 {
@@ -44,5 +45,7 @@ class Master
         $this->name = $name;
         $this->acronym = $acronym;
         $this->description = $description;
+        $this->users = new ArrayCollection();
+        $this->courses = new ArrayCollection();
     }
 }
