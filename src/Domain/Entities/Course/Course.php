@@ -6,11 +6,13 @@ namespace Malendar\Domain\Entities\Course;
 
 use Malendar\Domain\Entities\Calendar\Calendar;
 use Malendar\Domain\Entities\Master\Master;
+use Malendar\Domain\Entities\ValueObject\UuId;
+
 
 class Course
 {
     /**
-     * @var integer
+     * @var UuId
      */
     private $id;
 

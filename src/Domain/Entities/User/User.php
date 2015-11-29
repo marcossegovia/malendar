@@ -3,7 +3,6 @@
 
 namespace Malendar\Domain\Entities\User;
 
-
 use Malendar\Domain\Entities\ValueObject\UuId;
 use Malendar\Domain\Entities\ValueObject\Email;
 
@@ -11,7 +10,7 @@ use Malendar\Domain\Entities\ValueObject\Email;
 class User
 {
     /**
-     * @var UserId
+     * @var UuId
      */
     private $id;
 
@@ -36,7 +35,7 @@ class User
     private $admin;
 
     /**
-     * @var Master
+     * @var array
      */
     private $masters;
 

@@ -1,11 +1,10 @@
 Malendar\Domain\Entities\Course\Course:
   type: entity
   table: course
-  id:
+  embedded:
     id:
-      type: integer
-      generator:
-        strategy: AUTO
+      class: Malendar\Domain\Entities\ValueObject\UuId
+      columnPrefix: false
   fields:
     date_start:
       type: datetime

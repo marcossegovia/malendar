@@ -4,11 +4,13 @@
 namespace Malendar\Domain\Entities\Master;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Malendar\Domain\Entities\ValueObject\UuId;
+
 
 class Master
 {
     /**
-     * @var int
+     * @var UuId
      */
     private $id;
 
