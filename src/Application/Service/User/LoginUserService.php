@@ -19,7 +19,6 @@ class LoginUserService implements ApplicationServiceInterface
 
     public function execute($request = null)
     {
-        // TODO: Implement execute() method.
         $command = new LoginUserCommand($request->get('user'), $request->get('password'));
         $this->commandBus->handle($command);
     }

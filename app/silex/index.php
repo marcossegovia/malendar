@@ -5,6 +5,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -15,7 +17,7 @@ $app->get('/', function () use ($app) {
     if (null === $app['session']->get('user')) {
         return $app->redirect($app["url_generator"]->generate("login"));
     }
-    return $app->redirect($app["url_generator"]->generate("calendar"));
+    return $app->redirect($app["url_generator"]->generate("dashboard"));
 });
 
 $app->get('/login', function () use ($app) {
@@ -32,7 +34,7 @@ $app->post('/login', function (Request $request) use ($app) {
     } catch (Exception $e) {
         return new Response($app['twig']->render('login.html', ['formError' => true]), 400);
     }
-    return $app->redirect($app["url_generator"]->generate("calendar"));
+    return $app->redirect($app["url_generator"]->generate("dashboard"));
 });
 
 $app->get('/logout', function (Request $request) use ($app) {
@@ -46,6 +48,13 @@ $app->get('/logout', function (Request $request) use ($app) {
 
 })->bind('logout');
 
+$app->get('/dashboard', function(Request $request) use ($app) {
+    if (null === $app['session']->get('user')) {
+        return $app->redirect($app["url_generator"]->generate("login"));
+    }
+    return new Response($app['twig']->render('dashboard.html', ['user' => $app['session']->get('user')]), 200);
+})->bind('dashboard');
+
 $app->get('/calendar', function () use ($app) {
     if (null === $app['session']->get('user')) {
         return $app->redirect($app["url_generator"]->generate("login"));
@@ -54,7 +63,10 @@ $app->get('/calendar', function () use ($app) {
 })->bind('calendar');
 
 
+
 $app->error(function (\Exception $e, $code) use ($app) {
+
+    echo $e->getMessage();
     if ($app['debug']) {
         return;
     }
@@ -62,6 +74,7 @@ $app->error(function (\Exception $e, $code) use ($app) {
         return new Response($app['twig']->render('errors/404_e.html'), $code);
     }
     if ($code == 500) {
+
         return new Response($app['twig']->render('errors/500.html'), $code);
     }
     if (substr($code, 0, 1) == 4) {

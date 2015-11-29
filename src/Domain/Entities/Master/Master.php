@@ -27,7 +27,7 @@ class Master
     private $description;
 
     /**
-     * @var User
+     * @var array
      */
     private $users;
 
@@ -38,8 +38,11 @@ class Master
 
 
 
-    public function __construct()
+    public function __construct($id, $name, $acronym, $description)
     {
-
+        $this->id = $id;
+        $this->name = $name;
+        $this->acronym = $acronym;
+        $this->description = $description;
     }
 }

@@ -1,3 +1,67 @@
+
+/*
+    DASHBOARD
+*/
+
+
+header{
+    background: #ffffff;
+    overflow: auto;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 1px 20px 1px rgba(0,0,0,0.34);
+    -moz-box-shadow: 0px 1px 20px 1px rgba(0,0,0,0.34);
+    box-shadow: 0px 1px 20px 1px rgba(0,0,0,0.34);
+}
+
+header h1{
+    margin: 0;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    float:left;
+}
+
+header ul{
+    margin:0;
+    margin-right: 40px;
+    margin-top: 35px;
+    list-style: none;
+    float:right;
+    -webkit-padding-start: 0px;
+}
+
+header ul li{
+    margin-left:20px;
+    display:inline-block;
+}
+
+.left-container{
+    float:left;
+    margin-top:20px;
+    margin-left:20px;
+    padding:20px;
+    background: rgba(201, 179, 140, 0.34);
+    border: solid 1px #000000;
+    border-radius: 5px;
+    line-height: 200%;
+}
+
+.left-container ul{
+    margin:0;
+    list-style: none;
+    -webkit-padding-start: 0px;
+}
+
+.right-container{
+    float:left;
+}
+
+
+
+/*
+    CALENDAR
+*/
+
 #calendar {
     max-width: 900px;
     margin: 0 auto;

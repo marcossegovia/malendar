@@ -19,11 +19,6 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
         $this->_em->flush();
     }
 
-    public function findAll()
-    {
-        return $this->_em->findAll();
-    }
-
     public function findByEmail(Email $email)
     {
         $query = $this->_em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.email.email = :email');
