@@ -58,13 +58,19 @@ class Application
             ),
         ));
 
-        //Services
+        //Repositories
 
         $app['user_repository'] = $app->share(function ($app) {
             return $app['orm.em']->getRepository('Malendar\Domain\Entities\User\User');
         });
 
-        //Command Handlers
+        $app['master_repository'] = $app->share(function ($app){
+           return $app['orm.em']->getRepository('Malendar\Domain\Entities\Master\Master');
+        });
+
+
+        //Commands/Handlers
+
         $app['LoginUserCommandHandler'] = $app->share(function ($app) {
             return new \Malendar\Application\User\LoginUserCommandHandler($app['user_repository'], $app['session']);
         });

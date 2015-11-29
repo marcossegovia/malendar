@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Master
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
@@ -48,4 +48,53 @@ class Master
         $this->users = new ArrayCollection();
         $this->courses = new ArrayCollection();
     }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCourses()
+    {
+        return $this->courses;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAcronym()
+    {
+        return $this->acronym;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
 }

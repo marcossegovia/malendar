@@ -7,7 +7,7 @@ use Malendar\Infrastructure\Factory\UserFactory;
 use Malendar\Infrastructure\Factory\UserIdFactory;
 use Silex\Application;
 
-class UserCaseRepositoryTest extends \PHPUnit_Framework_TestCase
+class DoctrineUserRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testNextUserIdReturnsUserId()
     {

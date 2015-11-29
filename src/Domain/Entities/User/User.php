@@ -99,7 +99,7 @@ class User
         $this->name = $username;
     }
 
-    public function admin()
+    public function isAdmin()
     {
         return $this->admin;
     }

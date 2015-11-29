@@ -1,5 +1,6 @@
 Malendar\Domain\Entities\Master\Master:
   type: entity
+  repositoryClass: Malendar\Infrastructure\Persistence\DoctrineMasterRepository
   table: master
   id:
     id:

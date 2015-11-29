@@ -11,6 +11,8 @@ use Malendar\Domain\Entities\ValueObject\UserId;
 
 class DoctrineMasterRepository extends EntityRepository implements MasterRepositoryInterface
 {
+
+
     public function add(Master $master)
     {
 
