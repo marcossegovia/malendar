@@ -21,7 +21,7 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('/login', function () use ($app) {
-    return new Response($app['twig']->render('login.html', ['formError' => false]), 200);
+    return new Response($app['twig']->render('login.twig', ['formError' => false]), 200);
 })->bind('login');
 
 $app->post('/login', function (Request $request) use ($app) {
@@ -32,7 +32,7 @@ $app->post('/login', function (Request $request) use ($app) {
         $loginService = new \Malendar\Application\Service\User\LoginUserService($commandBus);
         $loginService->execute($request);
     } catch (Exception $e) {
-        return new Response($app['twig']->render('login.html', ['formError' => true]), 400);
+        return new Response($app['twig']->render('login.twig', ['formError' => true]), 400);
     }
     return $app->redirect($app["url_generator"]->generate("dashboard"));
 });
@@ -52,14 +52,14 @@ $app->get('/dashboard', function(Request $request) use ($app) {
     if (null === $app['session']->get('user')) {
         return $app->redirect($app["url_generator"]->generate("login"));
     }
-    return new Response($app['twig']->render('dashboard.html', ['user' => $app['session']->get('user')]), 200);
+    return new Response($app['twig']->render('dashboard.twig', ['user' => $app['session']->get('user')]), 200);
 })->bind('dashboard');
 
 $app->get('/calendar', function () use ($app) {
     if (null === $app['session']->get('user')) {
         return $app->redirect($app["url_generator"]->generate("login"));
     }
-    return new Response($app['twig']->render('calendar.html'), 200);
+    return new Response($app['twig']->render('calendar.twig'), 200);
 })->bind('calendar');
 
 
@@ -71,20 +71,20 @@ $app->error(function (\Exception $e, $code) use ($app) {
         return;
     }
     if ($code == 404) {
-        return new Response($app['twig']->render('errors/404_e.html'), $code);
+        return new Response($app['twig']->render('errors/404_e.twig'), $code);
     }
     if ($code == 500) {
 
-        return new Response($app['twig']->render('errors/500.html'), $code);
+        return new Response($app['twig']->render('errors/500.twig'), $code);
     }
     if (substr($code, 0, 1) == 4) {
-        return new Response($app['twig']->render('errors/4xx.html'), $code);
+        return new Response($app['twig']->render('errors/4xx.twig'), $code);
     }
     if (substr($code, 0, 1) == 5) {
-        return new Response($app['twig']->render('errors/5xx.html'), $code);
+        return new Response($app['twig']->render('errors/5xx.twig'), $code);
     }
 
-    return new Response($app['twig']->render('errors/default.html'), $code);
+    return new Response($app['twig']->render('errors/default.twig'), $code);
 });
 
 $app->run();

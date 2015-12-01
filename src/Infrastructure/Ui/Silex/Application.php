@@ -29,8 +29,8 @@ class Application
         $app->register(new ValidatorServiceProvider());
         $app->register(new ServiceControllerServiceProvider());
         $app->register(new TwigServiceProvider(), array(
-            'twig.path' => __DIR__ . '/../../../../src/Application/Resources/Templates'
-           // 'twig.options' => array('cache' => __DIR__ . '/../../../../app/var/cache/twig')
+            'twig.path' => __DIR__ . '/../../../../src/Application/Resources/Templates',
+            'twig.options' => array('cache' => __DIR__ . '/../../../../app/var/cache/twig', 'debug' => 'true')
         ));
         $app->register(new SessionServiceProvider());
 
