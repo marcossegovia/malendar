@@ -1,5 +1,12 @@
 {% extends "header.twig" %}
 
+{% block title %}Login{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <link href="{{ app.request.basepath }}/css/login_page.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
 {% block content %}
 <div class="container">
 

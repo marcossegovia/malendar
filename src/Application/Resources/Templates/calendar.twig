@@ -1,6 +1,17 @@
 {% extends "header.twig" %}
 
+{% block title %}Calendar{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <link href='{{ app.request.basepath }}/css/calendar/fullcalendar.css' rel='stylesheet' />
+    <link href='{{ app.request.basepath }}/css/calendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <script src='{{ app.request.basepath }}/js/fullcalendar.js'></script>
+{% endblock %}
+
+
 {% block content %}
+
 <script>
 
     $(document).ready(function() {
