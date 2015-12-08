@@ -98,4 +98,9 @@ class Master
         return $this->users;
     }
 
+    public function addNewCourse()
+    {
+
+    }
+
 }

@@ -7,27 +7,27 @@ final class UuId
 {
     private $id;
 
-    public function __construct()
+    public function __construct($raw_id)
     {
-        $this->id = \Rhumsaa\Uuid\Uuid::uuid4();
+        $this->id = $raw_id;
     }
 
-    public function __toString()
+    public static function generate()
     {
-        return $this->id->toString();
+        return new self(\Rhumsaa\Uuid\Uuid::uuid4()->toString());
     }
 
     public function toString()
     {
-        return $this->id->toString();
+        return $this->id;
     }
 
-    public function equals(UuId $userId)
+    public function equals(UuId $uiId)
     {
-        return strcmp($this->getUserId(), $userId->getUserId()) == 0;
+        return $this->id() === $uiId->id();
     }
 
-    public function getUserId()
+    public function id()
     {
         return $this->id;
     }

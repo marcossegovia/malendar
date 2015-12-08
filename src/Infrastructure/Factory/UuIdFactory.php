@@ -11,6 +11,6 @@ class UuIdFactory implements UserIdFactoryInterface
 
     public static function create()
     {
-        return new UuId();
+        return UuId::generate();
     }
 }
