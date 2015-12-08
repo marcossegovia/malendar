@@ -3,14 +3,14 @@
 <head>
     {% block head %}
     <title>{% block title %}{% endblock %} - Malendar</title>
-    <link href="{{ app.request.basepath }}/css/normalize.css" rel="stylesheet" type="text/css"/>
-    <link href="{{ app.request.basepath }}/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <link href="{{ app.request.basepath }}/css/main.css" rel="stylesheet" type="text/css"/>
-    <link rel='stylesheet' href='{{ app.request.basepath }}/css/calendar/jquery-ui.min.css' />
+    <link href="./../app/silex/css/normalize.css" rel="stylesheet" type="text/css"/>
+    <link href="./../app/silex/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="./../app/silex/css/main.css" rel="stylesheet" type="text/css"/>
+    <link rel='stylesheet' href='./../app/silex/css/calendar/jquery-ui.min.css' />
 
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src='{{ app.request.basepath }}/js/lib/moment.min.js'></script>
+    <script src='./../app/silex/js/lib/moment.min.js'></script>
     <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
@@ -283,7 +283,7 @@
     c-0.049-0.366-0.046-0.739-0.025-1.11c0.009-0.125,0.024-0.25,0.042-0.375C12.122,17.814,12.141,17.732,12.164,17.65z"></path>
     </g>
 </svg>
-<script src="/Malendar/app/silex/js/particle_canvas.js"></script>
+<script src="./../app/silex/js/particle_canvas.js"></script>
 
 </body>
 </html>

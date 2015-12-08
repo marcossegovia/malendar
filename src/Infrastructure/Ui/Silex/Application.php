@@ -29,7 +29,7 @@ class Application
         $app->register(new ValidatorServiceProvider());
         $app->register(new ServiceControllerServiceProvider());
         $app->register(new TwigServiceProvider(), array(
-            'twig.path' => __DIR__ . '/../../../../src/Application/Resources/Templates',
+            'twig.path' => __DIR__ . '/../../../../app/silex/Templates',
             'twig.options' => array('cache' => __DIR__ . '/../../../../app/var/cache/twig', 'debug' => 'true')
         ));
         $app->register(new SessionServiceProvider());
@@ -52,7 +52,7 @@ class Application
                     array(
                         'type' => 'yml',
                         'namespace' => 'Malendar\\Domain\\Entities\\',
-                        'path' => __DIR__ . "/../../../../src/Application/Resources/config/yaml/",
+                        'path' => __DIR__ . "/../../../../app/config/doctrine/",
                     ),
                 ),
             ),

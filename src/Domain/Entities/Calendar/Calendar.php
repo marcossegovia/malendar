@@ -3,7 +3,6 @@
 
 namespace Malendar\Domain\Entities\Calendar;
 
-
 use Malendar\Domain\Entities\Course\Course;
 use Malendar\Domain\Entities\ValueObject\UuId;
 

@@ -4,7 +4,7 @@
 
 {% block head %}
     {{ parent() }}
-    <link href="{{ app.request.basepath }}/css/login_page.css" rel="stylesheet" type="text/css"/>
+    <link href="./../app/silex/css/login_page.css" rel="stylesheet" type="text/css"/>
 {% endblock %}
 
 {% block content %}
@@ -60,7 +60,7 @@
 </div>
 
 {% if formError == true %}
-    <script src="/Malendar/app/silex/js/login.js"></script>
+    <script src="./../app/silex/js/login.js"></script>
 {% endif %}
 
 {% endblock %}
