@@ -7,7 +7,7 @@ namespace Malendar\Infrastructure\Persistence;
 use Doctrine\ORM\EntityRepository;
 use Malendar\Domain\Entities\Master\Master;
 use Malendar\Domain\Entities\Master\MasterRepositoryInterface;
-use Malendar\Domain\Entities\ValueObject\UserId;
+use Malendar\Domain\Entities\ValueObject\UuId;
 
 class DoctrineMasterRepository extends EntityRepository implements MasterRepositoryInterface
 {
@@ -18,7 +18,7 @@ class DoctrineMasterRepository extends EntityRepository implements MasterReposit
 
     }
 
-    public function findByUserId(UserId $userId)
+    public function findByUserId(UuId $uuId)
     {
 
     }

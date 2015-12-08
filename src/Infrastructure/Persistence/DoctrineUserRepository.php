@@ -30,8 +30,8 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
 
     public function findByUsername($username)
     {
-        $query = $this->_em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.name = :namee');
-        $query->setParameter('namee', $username);
+        $query = $this->_em->createQuery('SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.name = :name');
+        $query->setParameter('name', $username);
         $user = $query->getResult();
         return $user == null ? self::NO_USER_FOUND : UserFactory::create($user[0]->getUserId(), $user[0]->getName(),
             $user[0]->getEmail(), $user[0]->isAdmin(), null, $user[0]->getHashCode());
