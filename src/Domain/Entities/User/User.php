@@ -3,6 +3,8 @@
 
 namespace Malendar\Domain\Entities\User;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Malendar\Domain\Entities\Master\Master;
 use Malendar\Domain\Entities\ValueObject\UuId;
 use Malendar\Domain\Entities\ValueObject\Email;
 
@@ -45,6 +47,7 @@ class User
         $this->name = $name;
         $this->email = $email;
         $this->admin = $admin;
+        $this->masters = new ArrayCollection();
 
         if ($password === null) {
             $this->hashCode = $hashCode;
@@ -76,14 +79,14 @@ class User
         return hash_equals($this->hashCode, crypt($password, $this->hashCode));
     }
 
-    public function getUserId()
+    public function getId()
     {
         return $this->id;
     }
 
     public function equals(User $user)
     {
-        return $this->id->equals($user->getUserId());
+        return $this->id->equals($user->getId());
     }
 
     public function setPassword($password)
@@ -101,5 +104,20 @@ class User
     public function isAdmin()
     {
         return $this->admin;
+    }
+
+    public function getMastersCollection(UserRepositoryInterface $repository)
+    {
+
+    }
+
+    public function getMasters()
+    {
+        return $this->masters;
+    }
+
+    public function addMaster(Master $master)
+    {
+        $this->masters->add($master);
     }
 }

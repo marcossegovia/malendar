@@ -22,7 +22,7 @@ class LoginUserServiceTest extends \PHPUnit_Framework_TestCase
 
         $loginService->execute(Request::create('POST', '/login', array('form' => array('user' => 'Auron', 'password' => '1234'))));
 
-        //$app['session']->set('id', $user->getUserId());
+        //$app['session']->set('id', $user->getId());
         //var_dump($app['session']);
         $this->assertEquals($id, $app['session']->get('id'));
 

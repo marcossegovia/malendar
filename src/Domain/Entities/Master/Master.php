@@ -3,6 +3,7 @@
 
 namespace Malendar\Domain\Entities\Master;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Malendar\Domain\Entities\ValueObject\UuId;
 
@@ -29,6 +30,11 @@ class Master
     private $description;
 
     /**
+     * @var Datetime;
+     */
+    private $created_at;
+
+    /**
      * @var array
      */
     private $users;
@@ -40,14 +46,15 @@ class Master
 
 
 
-    public function __construct($id, $name, $acronym, $description)
+    public function __construct($id, $name, $acronym, $description, $created_at)
     {
         $this->id = $id;
         $this->name = $name;
         $this->acronym = $acronym;
         $this->description = $description;
-        $this->users = new ArrayCollection();
-        $this->courses = new ArrayCollection();
+        $this->created_at = $created_at;
+        //$this->users = new ArrayCollection();
+        //$this->courses = new ArrayCollection();
     }
 
     /**
@@ -88,6 +95,11 @@ class Master
     public function getDescription()
     {
         return $this->description;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created_at;
     }
 
     /**

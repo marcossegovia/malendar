@@ -2,9 +2,12 @@
 
 namespace Malendar\Tests\Infrastructure\Persistence;
 
+use DateTime;
 use Malendar\Infrastructure\Factory\EmailFactory;
+use Malendar\Infrastructure\Factory\MasterFactory;
 use Malendar\Infrastructure\Factory\UserFactory;
 use Malendar\Infrastructure\Factory\UuIdFactory;
+use Malendar\Infrastructure\Persistence\DoctrineUserRepository;
 use Silex\Application;
 
 class DoctrineUserRepositoryTest extends \PHPUnit_Framework_TestCase
@@ -22,7 +25,7 @@ class DoctrineUserRepositoryTest extends \PHPUnit_Framework_TestCase
         $user = UserFactory::create(UuIdFactory::create(), 'Pablo', EmailFactory::create('pablo@gmail.com'), false, '12745');
         $repository->add($user);
 
-        $user = $repository->find($user->getUserId());
+        $user = $repository->find($user->getId());
         $this->assertTrue(count($user) == 1);
 
         $repository->remove($user);
@@ -130,6 +133,29 @@ class DoctrineUserRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($userSent->equals($userReceived));
 
         $repository->remove($userSent);
+    }
+
+    public function testRepositoryRetrievesUserMasters()
+    {
+        $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
+        /** @var DoctrineUserRepository $repository */
+        $repository = $app['user_repository'];
+
+        $user = UserFactory::create(UuIdFactory::create(), 'Marcos', EmailFactory::create('marcos@gmail.com'), false, 'marcos123');
+        $master1 = MasterFactory::create(UuIdFactory::create(), 'Master Programacion Web', 'MPWAR', 'This master is the coolest', new DateTime('NOW'));
+        $master2 = MasterFactory::create(UuIdFactory::create(), 'Master de Robótica', 'MRSALLE', 'This master is about teaching the fundamentals of robotics', new DateTime('NOW'));
+
+        $user->addMaster($master1);
+        $user->addMaster($master2);
+        $repository->add($user);
+
+        $masters = $repository->findAllRelatedMasters($user->getId());
+        $this->assertEquals($master1, $masters[0]);
+        $this->assertEquals($master2, $masters[1]);
+
+        $repository->remove($user);
+        $repository->removeMaster($master1);
+        $repository->removeMaster($master2);
     }
 
 }
