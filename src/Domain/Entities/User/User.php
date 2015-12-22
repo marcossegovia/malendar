@@ -4,6 +4,7 @@ namespace Malendar\Domain\Entities\User;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Malendar\Domain\Entities\Master\Master;
+use Malendar\Domain\Entities\User\Exception\UserValidationException;
 use Malendar\Domain\Entities\ValueObject\UuId;
 use Malendar\Domain\Entities\ValueObject\Email;
 
@@ -77,7 +78,10 @@ class User
 
 	public function validate($password)
 	{
-		return hash_equals( $this->hashCode, crypt( $password, $this->hashCode ) );
+		if (!hash_equals( $this->hashCode, crypt( $password, $this->hashCode ) ))
+		{
+			throw new UserValidationException();
+		}
 	}
 
 	public function getId()

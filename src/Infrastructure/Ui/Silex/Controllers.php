@@ -1,5 +1,8 @@
 <?php
 
+use Malendar\Application\Service\User\LoginUserRequest;
+use Malendar\Application\Service\User\LoginUserService;
+use Malendar\Domain\Entities\User\Exception\UnauthorizedUserException;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,16 +26,16 @@ $app->get( '/login', function () use ($app)
 
 $app->post( '/login', function (Request $request) use ($app)
 {
-	$commandBus = $app['commandBus'];
 
 	try
 	{
-		$loginService = new \Malendar\Application\Service\User\LoginUserService( $commandBus );
-		$loginService->execute( $request );
+		$login_user_request = new LoginUserRequest( $request->get( 'user' ), $request->get( 'password' ) );
+		$loginService       = new LoginUserService( $app['user_repository'], $app['session'] );
+		$loginService->__invoke( $login_user_request );
 	}
-	catch ( Exception $e )
+	catch ( UnauthorizedUserException $e )
 	{
-		return new Response( $app['twig']->render( 'login.twig', ['formError' => TRUE] ), 400 );
+		return new Response( $app['twig']->render( 'login.twig', ['formError' => TRUE] ), $e->getCode() );
 	}
 
 	return $app->redirect( $app["url_generator"]->generate( "dashboard" ) );
@@ -41,6 +44,7 @@ $app->post( '/login', function (Request $request) use ($app)
 
 $app->get( '/logout', function (Request $request) use ($app)
 {
+
 	$session       = $app['session'];
 	$logoutService = new \Malendar\Application\Service\User\LogoutUserService( $session );
 
@@ -75,6 +79,7 @@ $app->get( '/calendar', function () use ($app)
 
 $app->error( function (\Exception $e, $code) use ($app)
 {
+
 	echo $e->getMessage();
 	if ($app['debug'])
 	{

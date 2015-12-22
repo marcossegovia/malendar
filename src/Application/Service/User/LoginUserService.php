@@ -2,23 +2,42 @@
 
 namespace Malendar\Application\Service\User;
 
-use Malendar\Application\Service\ApplicationServiceInterface;
-use Malendar\Application\User\LoginUserCommand;
+use Malendar\Domain\Entities\User\Exception\UserNotFoundException;
+use Malendar\Domain\Entities\User\UserRepositoryInterface;
 use Silex\Application;
-use SimpleBus\Message\Bus\MessageBus;
+use Symfony\Component\HttpFoundation\Session\Session;
 
-class LoginUserService implements ApplicationServiceInterface
+final class LoginUserService
 {
-	private $commandBus;
+	/** @var  UserRepositoryInterface */
+	private $user_repository;
 
-	public function __construct(MessageBus $commandBus)
+	/** @var Session */
+	private $session_client;
+
+	public function __construct(UserRepositoryInterface $my_user_repository, Session $my_session)
 	{
-		$this->commandBus = $commandBus;
+		$this->user_repository = $my_user_repository;
+		$this->session_client  = $my_session;
 	}
 
-	public function execute($request = NULL)
+	public function __invoke(LoginUserRequest $a_login_request)
 	{
-		$command = new LoginUserCommand( $request->get( 'user' ), $request->get( 'password' ) );
-		$this->commandBus->handle( $command );
+		$user = $this->user_repository->findByUsername( $a_login_request->username() );
+
+		if (empty( $user ) || !isset( $user ))
+		{
+			throw new UserNotFoundException();
+		}
+
+		$user->validate( $a_login_request->password() );
+
+		$this->session_client->start();
+		$this->session_client->set( 'user', array(
+											  'id'       => $user->getUserId(),
+											  'username' => $user->getName(),
+											  'email'    => $user->getEmail()
+										  )
+		);
 	}
 }
