@@ -15,8 +15,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
 	{
 		$email = EmailFactory::create( 'pablo@gmail.com' );
 		$user  = UserFactory::create( UuIdFactory::create(), 'Pablo', $email, FALSE, '1234' );
-		$this->assertEquals( 'Pablo', $user->getName() );
-		$this->assertEquals( 'pablo@gmail.com', $user->getEmail() );
+		$this->assertEquals( 'Pablo', $user->name() );
+		$this->assertEquals( 'pablo@gmail.com', $user->email() );
 	}
 
 	public function testUserThrowExceptionsWhenValidatationGoWrong()
@@ -25,13 +25,5 @@ class UserTest extends \PHPUnit_Framework_TestCase
 		$user  = UserFactory::create( UuIdFactory::create(), 'Pablo', $email, FALSE, '1234' );
 		$this->setExpectedException(UserValidationException::class, 'The user and password provided do not match.');
 		$user->validate( '4321' );
-	}
-
-	public function testEmailIsValid()
-	{
-		$app = new Application();
-		$app->register( new ValidatorServiceProvider() );
-		$email = EmailFactory::create( 'pablo@gmail.com' );
-		$this->assertTrue( $email->validate( $app ) );
 	}
 }

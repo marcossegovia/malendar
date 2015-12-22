@@ -7,7 +7,6 @@ use Malendar\Domain\Entities\ValueObject\UuId;
 
 class UuIdFactory implements UserIdFactoryInterface
 {
-
 	public static function create()
 	{
 		return UuId::generate();

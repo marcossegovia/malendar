@@ -2,10 +2,9 @@
 
 namespace Malendar\Application\Service\User;
 
-use Malendar\Application\Service\ApplicationServiceInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class LogoutUserService implements ApplicationServiceInterface
+class LogoutUserService
 {
 	private $session;
 
@@ -14,7 +13,7 @@ class LogoutUserService implements ApplicationServiceInterface
 		$this->session = $session;
 	}
 
-	public function execute($request = NULL)
+	public function __invoke()
 	{
 		$this->session->clear();
 	}

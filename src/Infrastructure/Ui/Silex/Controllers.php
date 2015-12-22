@@ -2,6 +2,7 @@
 
 use Malendar\Application\Service\User\LoginUserRequest;
 use Malendar\Application\Service\User\LoginUserService;
+use Malendar\Application\Service\User\LogoutUserService;
 use Malendar\Domain\Entities\User\Exception\UnauthorizedUserException;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,11 +45,10 @@ $app->post( '/login', function (Request $request) use ($app)
 
 $app->get( '/logout', function (Request $request) use ($app)
 {
-
 	$session       = $app['session'];
-	$logoutService = new \Malendar\Application\Service\User\LogoutUserService( $session );
+	$logoutService = new LogoutUserService( $session );
 
-	$logoutService->execute( $request );
+	$logoutService->__invoke();
 
 	return $app->redirect( $app["url_generator"]->generate( "login" ) );
 

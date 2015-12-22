@@ -32,9 +32,9 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
 		$query->setParameter( 'email', $email->getEmail() );
 		$user = $query->getResult();
 
-		return $user == NULL ? self::NO_USER_FOUND : UserFactory::create( $user[0]->getId(), $user[0]->getName(),
-																		  $user[0]->getEmail(), $user[0]->isAdmin(),
-																		  NULL, $user[0]->getHashCode()
+		return $user == NULL ? self::NO_USER_FOUND : UserFactory::create( $user[0]->id(), $user[0]->name(),
+																		  $user[0]->email(), $user[0]->isAdmin(),
+																		  NULL, $user[0]->hashCode()
 		);
 	}
 
@@ -44,9 +44,9 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
 		$query->setParameter( 'name', $username );
 		$user = $query->getResult();
 
-		return $user == NULL ? self::NO_USER_FOUND : UserFactory::create( $user[0]->getId(), $user[0]->getName(),
-																		  $user[0]->getEmail(), $user[0]->isAdmin(),
-																		  NULL, $user[0]->getHashCode()
+		return $user == NULL ? self::NO_USER_FOUND : UserFactory::create( $user[0]->id(), $user[0]->name(),
+																		  $user[0]->email(), $user[0]->isAdmin(),
+																		  NULL, $user[0]->hashCode()
 		);
 	}
 
@@ -67,7 +67,7 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
 		$this->_em->flush();
 	}
 
-	public function findAllRelatedMasters(Uuid $userId)
+	public function findAllRelatedMasters(Uuid $a_user_id)
 	{
 		$queryBuilder = $this->_em->createQueryBuilder( 'u' );
 		$queryBuilder->select( 'm' )
@@ -75,7 +75,7 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
 			->leftjoin( 'Malendar\Domain\Entities\User\User', 'u' )
 			->where( 'u.id.id = :userId' )
 			->orderBy( 'm.created_at', 'DESC' )
-			->setParameter( 'userId', $userId->id() );
+			->setParameter( 'userId', $a_user_id->id() );
 		$arrayRawMasters = $queryBuilder->getQuery()->getResult();
 
 		$arrayMasters = [];

@@ -61,17 +61,22 @@ class User
 
 	}
 
-	public function getName()
+	public function id()
+	{
+		return $this->id;
+	}
+
+	public function name()
 	{
 		return $this->name;
 	}
 
-	public function getEmail()
+	public function email()
 	{
 		return $this->email;
 	}
 
-	public function getHashCode()
+	public function hashCode()
 	{
 		return $this->hashCode;
 	}
@@ -84,14 +89,9 @@ class User
 		}
 	}
 
-	public function getId()
-	{
-		return $this->id;
-	}
-
 	public function equals(User $user)
 	{
-		return $this->id->equals( $user->getId() );
+		return $this->id->equals( $user->id() );
 	}
 
 	public function setPassword($password)

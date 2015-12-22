@@ -34,9 +34,9 @@ final class LoginUserService
 
 		$this->session_client->start();
 		$this->session_client->set( 'user', array(
-											  'id'       => $user->getUserId(),
-											  'username' => $user->getName(),
-											  'email'    => $user->getEmail()
+											  'id'       => $user->id(),
+											  'username' => $user->name(),
+											  'email'    => $user->email()
 										  )
 		);
 	}

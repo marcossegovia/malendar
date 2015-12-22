@@ -7,7 +7,6 @@ use Malendar\Domain\Entities\ValueObject\EmailFactoryInterface;
 
 class EmailFactory implements EmailFactoryInterface
 {
-
 	public static function create($email)
 	{
 		return new Email( $email );

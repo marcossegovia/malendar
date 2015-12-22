@@ -10,14 +10,6 @@ use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
 
-use SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext;
-use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
-use SimpleBus\Message\CallableResolver\CallableMap;
-use SimpleBus\Message\CallableResolver\ServiceLocatorAwareCallableResolver;
-use SimpleBus\Message\Handler\DelegatesToMessageHandlerMiddleware;
-use SimpleBus\Message\Handler\Resolver\NameBasedMessageHandlerResolver;
-use SimpleBus\Message\Name\ClassBasedNameResolver;
-
 class Application
 {
 	public static function boostrap()
@@ -75,55 +67,6 @@ class Application
 		$app['master_repository'] = $app->share( function ($app)
 		{
 			return $app['orm.em']->getRepository( 'Malendar\Domain\Entities\Master\Master' );
-		}
-		);
-
-		//Commands/Handlers
-
-		$app['LoginUserCommandHandler'] = $app->share( function ($app)
-		{
-			return new \Malendar\Application\User\LoginUserCommandHandler( $app['user_repository'], $app['session'] );
-		}
-		);
-
-		$app['commandBus'] = $app->share( function ($app)
-		{
-
-			//Instantiation of CommandBus
-			$commandBus = new MessageBusSupportingMiddleware();
-			//Commands are always fully handled before other commands will be handled
-			$commandBus->appendMiddleware( new FinishesHandlingMessageBeforeHandlingNext() );
-
-			$commandHandlersByCommandName = [
-				// the "command_handler_service_id" service will be resolved when needed (see below)
-				'Malendar\Application\User\LoginUserCommand' => ['LoginUserCommandHandler', 'handle']
-			];
-
-			$serviceLocator = function ($serviceId) use ($app)
-			{
-				return $app[ $serviceId ];
-			};
-
-			$commandHandlerMap = new CallableMap(
-				$commandHandlersByCommandName,
-				new ServiceLocatorAwareCallableResolver( $serviceLocator )
-			);
-
-			$commandNameResolver = new ClassBasedNameResolver();
-
-			$commandHandlerResolver = new NameBasedMessageHandlerResolver(
-				$commandNameResolver,
-				$commandHandlerMap
-			);
-
-			// We append to our CommandBus the resolver in order to attach Command to CommandHandler
-			$commandBus->appendMiddleware(
-				new DelegatesToMessageHandlerMiddleware(
-					$commandHandlerResolver
-				)
-			);
-
-			return $commandBus;
 		}
 		);
 
