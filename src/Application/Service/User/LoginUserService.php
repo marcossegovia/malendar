@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Malendar\Application\Service\User;
 
 use Malendar\Application\Service\ApplicationServiceInterface;
@@ -10,16 +9,16 @@ use SimpleBus\Message\Bus\MessageBus;
 
 class LoginUserService implements ApplicationServiceInterface
 {
-    private $commandBus;
+	private $commandBus;
 
-    public function __construct(MessageBus $commandBus)
-    {
-        $this->commandBus = $commandBus;
-    }
+	public function __construct(MessageBus $commandBus)
+	{
+		$this->commandBus = $commandBus;
+	}
 
-    public function execute($request = null)
-    {
-        $command = new LoginUserCommand($request->get('user'), $request->get('password'));
-        $this->commandBus->handle($command);
-    }
+	public function execute($request = NULL)
+	{
+		$command = new LoginUserCommand( $request->get( 'user' ), $request->get( 'password' ) );
+		$this->commandBus->handle( $command );
+	}
 }

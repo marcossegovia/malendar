@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Malendar\Domain\Entities\Calendar;
 
 use Malendar\Domain\Entities\Course\Course;
@@ -9,31 +8,29 @@ use Malendar\Infrastructure\Factory\UuIdFactory;
 
 class Calendar
 {
-    /**
-     * @var UuId
-     */
-    private $id;
+	/** @var UuId */
+	private $id;
 
-    /**
-     * @var Course
-     */
-    private $course;
+	/** @var  Course */
+	private $course;
 
-    private $events;
+	/** @var  Event[] */
+	private $events;
 
-    public function __construct(Uuid $id)
-    {
-        $this->id = $id;
-    }
+	public function __construct(Uuid $id)
+	{
+		$this->id = $id;
+	}
 
-    public function id()
-    {
-        return $this->id;
-    }
+	public function id()
+	{
+		return $this->id;
+	}
 
-    public static function create()
-    {
-        $id = UuIdFactory::create();
-        return new self($id);
-    }
+	public static function create()
+	{
+		$id = UuIdFactory::create();
+
+		return new self( $id );
+	}
 }

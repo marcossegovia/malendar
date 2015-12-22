@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Malendar\Domain\Entities\Master;
 
 use DateTime;
@@ -9,110 +8,108 @@ use Malendar\Domain\Entities\ValueObject\UuId;
 
 class Master
 {
-    /**
-     * @var UuId
-     */
-    private $id;
+	/**
+	 * @var UuId
+	 */
+	private $id;
 
-    /**
-     * @var string
-     */
-    private $name;
+	/**
+	 * @var string
+	 */
+	private $name;
 
-    /**
-     * @var string
-     */
-    private $acronym;
+	/**
+	 * @var string
+	 */
+	private $acronym;
 
-    /**
-     * @var string
-     */
-    private $description;
+	/**
+	 * @var string
+	 */
+	private $description;
 
-    /**
-     * @var Datetime;
-     */
-    private $created_at;
+	/**
+	 * @var Datetime;
+	 */
+	private $created_at;
 
-    /**
-     * @var array
-     */
-    private $users;
+	/**
+	 * @var array
+	 */
+	private $users;
 
-    /**
-     * @var array
-     */
-    private $courses;
+	/**
+	 * @var array
+	 */
+	private $courses;
 
+	public function __construct($id, $name, $acronym, $description, $created_at)
+	{
+		$this->id          = $id;
+		$this->name        = $name;
+		$this->acronym     = $acronym;
+		$this->description = $description;
+		$this->created_at  = $created_at;
+		//$this->users = new ArrayCollection();
+		//$this->courses = new ArrayCollection();
+	}
 
+	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    public function __construct($id, $name, $acronym, $description, $created_at)
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->acronym = $acronym;
-        $this->description = $description;
-        $this->created_at = $created_at;
-        //$this->users = new ArrayCollection();
-        //$this->courses = new ArrayCollection();
-    }
+	/**
+	 * @return array
+	 */
+	public function getCourses()
+	{
+		return $this->courses;
+	}
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
 
-    /**
-     * @return array
-     */
-    public function getCourses()
-    {
-        return $this->courses;
-    }
+	/**
+	 * @return string
+	 */
+	public function getAcronym()
+	{
+		return $this->acronym;
+	}
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+	/**
+	 * @return string
+	 */
+	public function getDescription()
+	{
+		return $this->description;
+	}
 
-    /**
-     * @return string
-     */
-    public function getAcronym()
-    {
-        return $this->acronym;
-    }
+	public function getCreatedAt()
+	{
+		return $this->created_at;
+	}
 
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
+	/**
+	 * @return array
+	 */
+	public function getUsers()
+	{
+		return $this->users;
+	}
 
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
+	public function addNewCourse()
+	{
 
-    /**
-     * @return array
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-
-    public function addNewCourse()
-    {
-
-    }
+	}
 
 }

@@ -1,10 +1,8 @@
 <?php
 
-
 namespace Malendar\Application\Service;
-
 
 interface ApplicationServiceInterface
 {
-    public function execute($request = null);
+	public function execute($request = NULL);
 }
