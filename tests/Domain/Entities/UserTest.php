@@ -3,6 +3,9 @@
 namespace Malendar\Tests\Domain\Entities;
 
 use Malendar\Domain\Entities\User\Exception\UserValidationException;
+use Malendar\Domain\Entities\User\User;
+use Malendar\Domain\Entities\ValueObject\Email;
+use Malendar\Domain\Entities\ValueObject\UuId;
 use Malendar\Infrastructure\Factory\EmailFactory;
 use Malendar\Infrastructure\Factory\UserFactory;
 use Malendar\Infrastructure\Factory\UuIdFactory;
@@ -13,17 +16,17 @@ class UserTest extends \PHPUnit_Framework_TestCase
 {
 	public function testUserHasFields()
 	{
-		$email = EmailFactory::create( 'pablo@gmail.com' );
-		$user  = UserFactory::create( UuIdFactory::create(), 'Pablo', $email, FALSE, '1234' );
+		$email = Email::build( 'pablo@gmail.com' );
+		$user  = User::register( 'Pablo', '1234', $email, FALSE );
 		$this->assertEquals( 'Pablo', $user->name() );
 		$this->assertEquals( 'pablo@gmail.com', $user->email() );
 	}
 
 	public function testUserThrowExceptionsWhenValidatationGoWrong()
 	{
-		$email = EmailFactory::create( 'pablo@gmail.com' );
-		$user  = UserFactory::create( UuIdFactory::create(), 'Pablo', $email, FALSE, '1234' );
-		$this->setExpectedException(UserValidationException::class, 'The user and password provided do not match.');
+		$email = Email::build( 'pablo@gmail.com' );
+		$user  = User::register( 'Pablo', '1234', $email, FALSE );
+		$this->setExpectedException( UserValidationException::class, 'The user and password provided do not match.' );
 		$user->validate( '4321' );
 	}
 }

@@ -15,6 +15,11 @@ final class Email
 		$this->email = $email;
 	}
 
+	public static function build($a_raw_email)
+	{
+		return new self($a_raw_email);
+	}
+
 	public function validate(Application $app)
 	{
 		return count( $app['validator']->validateValue( $this->email, new ValidatorAssert\Email() )
@@ -23,13 +28,12 @@ final class Email
 
 	public function __toString()
 	{
-		// TODO: Implement __toString() method.
 		return $this->email;
 	}
 
 	public function equals(Email $email)
 	{
-		return strcmp( $this->getEmail(), $email->getEmail() ) == 0;
+		return $this->getEmail() === $email->getEmail();
 	}
 
 	public function getEmail()
