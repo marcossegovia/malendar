@@ -44,7 +44,15 @@ class Master
 	 */
 	private $courses;
 
-	public function __construct($id, $name, $acronym, $description, $created_at, array $some_users, array $some_courses)
+	public function __construct(
+		$id,
+		$name,
+		$acronym,
+		$description,
+		$created_at,
+		array $some_users,
+		array $some_courses
+	)
 	{
 		$this->id          = $id;
 		$this->name        = $name;
@@ -53,7 +61,11 @@ class Master
 		$this->created_at  = $created_at;
 	}
 
-	public static function create($a_name, $an_acronym, $a_description)
+	public static function create(
+		$a_name,
+		$an_acronym,
+		$a_description
+	)
 	{
 		$a_new_id        = UuId::generate();
 		$a_creation_date = new DateTime();

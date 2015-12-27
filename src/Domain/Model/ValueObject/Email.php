@@ -21,7 +21,7 @@ final class Email
 	{
 		if (!filter_var( $this->email, FILTER_VALIDATE_EMAIL ))
 		{
-			throw new \InvalidArgumentException('This is a not valid Email.');
+			throw new \InvalidArgumentException( 'This is a not valid Email.' );
 		}
 	}
 

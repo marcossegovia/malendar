@@ -39,29 +39,41 @@ final class User
 	 */
 	private $masters;
 
-	public function __construct(UuId $a_uuid, $a_name, Email $an_email, $a_hashCode, $an_is_admin, $an_array_masters)
+	public function __construct(
+		UuId $a_uuid,
+		$a_name,
+		Email $an_email,
+		$a_hashCode,
+		$an_is_admin,
+		$an_array_masters
+	)
 	{
-		$this->id      = $a_uuid;
-		$this->name    = $a_name;
-		$this->email   = $an_email;
+		$this->id       = $a_uuid;
+		$this->name     = $a_name;
+		$this->email    = $an_email;
 		$this->hashCode = $a_hashCode;
-		$this->admin   = $an_is_admin;
-		$this->masters = $an_array_masters;
+		$this->admin    = $an_is_admin;
+		$this->masters  = $an_array_masters;
 
 	}
 
-	public static function register($a_name, $a_password, $an_email, $an_is_admin)
+	public static function register(
+		$a_name,
+		$a_password,
+		$an_email,
+		$an_is_admin
+	)
 	{
-		$id       = Uuid::generate();
-		$name     = $a_name;
-		$email    = $an_email;
-		$salt     = strtr( base64_encode( mcrypt_create_iv( 16, MCRYPT_DEV_URANDOM ) ), '+', '.' );
-		$salt     = "$3a$10$" . $salt;
-		$hascode  = crypt( $a_password, $salt );
-		$is_admin = $an_is_admin;
+		$id            = Uuid::generate();
+		$name          = $a_name;
+		$email         = $an_email;
+		$salt          = strtr( base64_encode( mcrypt_create_iv( 16, MCRYPT_DEV_URANDOM ) ), '+', '.' );
+		$salt          = "$3a$10$" . $salt;
+		$hascode       = crypt( $a_password, $salt );
+		$is_admin      = $an_is_admin;
 		$array_masters = [];
 
-		return new self($id, $name, $email, $hascode, $is_admin, $array_masters);
+		return new self( $id, $name, $email, $hascode, $is_admin, $array_masters );
 	}
 
 	public function id()

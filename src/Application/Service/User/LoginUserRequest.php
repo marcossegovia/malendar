@@ -7,7 +7,10 @@ final class LoginUserRequest
 	private $raw_username;
 	private $raw_password;
 
-	public function __construct($a_raw_username, $a_raw_password)
+	public function __construct(
+		$a_raw_username,
+		$a_raw_password
+	)
 	{
 		$this->raw_username = $a_raw_username;
 		$this->raw_password = $a_raw_password;

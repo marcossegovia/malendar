@@ -15,7 +15,10 @@ final class LoginUserService
 	/** @var Session */
 	private $session_client;
 
-	public function __construct(UserRepositoryInterface $my_user_repository, Session $my_session)
+	public function __construct(
+		UserRepositoryInterface $my_user_repository,
+		Session $my_session
+	)
 	{
 		$this->user_repository = $my_user_repository;
 		$this->session_client  = $my_session;
@@ -33,11 +36,12 @@ final class LoginUserService
 		$user->validate( $a_login_request->password() );
 
 		$this->session_client->start();
-		$this->session_client->set( 'user', array(
-											  'id'       => $user->id(),
-											  'username' => $user->name(),
-											  'email'    => $user->email()
-										  )
+		$this->session_client->set( 'user',
+									array(
+										'id' => $user->id(),
+										'username' => $user->name(),
+										'email' => $user->email()
+									)
 		);
 	}
 }

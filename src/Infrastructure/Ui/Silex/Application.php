@@ -20,40 +20,43 @@ class Application
 		$app->register( new UrlGeneratorServiceProvider() );
 		$app->register( new ValidatorServiceProvider() );
 		$app->register( new ServiceControllerServiceProvider() );
-		$app->register( new TwigServiceProvider(), array(
-													 'twig.path'    => __DIR__ . '/../../../../app/silex/Templates',
-													 'twig.options' => array(
-														 'cache' => __DIR__ . '/../../../../app/var/cache/twig',
-														 'debug' => 'true'
-													 )
-												 )
+		$app->register( new TwigServiceProvider(),
+						array(
+							'twig.path'    => __DIR__ . '/../../../../app/silex/Templates',
+							'twig.options' => array(
+								'cache' => __DIR__ . '/../../../../app/var/cache/twig',
+								'debug' => 'true'
+							)
+						)
 		);
 		$app->register( new SessionServiceProvider() );
 
-		$app->register( new DoctrineServiceProvider(), array(
-														 'db.options' => array(
-															 'driver'   => 'pdo_mysql',
-															 'dbname'   => 'world',
-															 'host'     => 'localhost',
-															 'user'     => 'root',
-															 'password' => 'root',
-															 'charset'  => 'utf8',
-														 )
-													 )
+		$app->register( new DoctrineServiceProvider(),
+						array(
+							'db.options' => array(
+								'driver'   => 'pdo_mysql',
+								'dbname'   => 'world',
+								'host'     => 'localhost',
+								'user'     => 'root',
+								'password' => 'root',
+								'charset'  => 'utf8',
+							)
+						)
 		);
 
-		$app->register( new DoctrineOrmServiceProvider, array(
-														  "orm.proxies_dir" => __DIR__ . "/var/cache/doctrine/proxy",
-														  "orm.em.options"  => array(
-															  "mappings" => array(
-																  array(
-																	  'type'      => 'yml',
-																	  'namespace' => 'Malendar\\Domain\\Model\\',
-																	  'path'      => __DIR__ . "/../../../../app/config/doctrine/",
-																  ),
-															  ),
-														  ),
-													  )
+		$app->register( new DoctrineOrmServiceProvider,
+						array(
+							"orm.proxies_dir" => __DIR__ . "/var/cache/doctrine/proxy",
+							"orm.em.options"  => array(
+								"mappings" => array(
+									array(
+										'type'      => 'yml',
+										'namespace' => 'Malendar\\Domain\\Model\\',
+										'path'      => __DIR__ . "/../../../../app/config/doctrine/",
+									),
+								),
+							),
+						)
 		);
 
 		//Repositories
@@ -70,11 +73,15 @@ class Application
 		}
 		);
 
-		$app['twig'] = $app->share( $app->extend( 'twig', function ($twig, $app)
-		{
+		$app['twig'] = $app->share( $app->extend( 'twig',
+			function (
+				$twig,
+				$app
+			)
+			{
 
-			return $twig;
-		}
+				return $twig;
+			}
 		)
 		);
 
