@@ -45,7 +45,7 @@ class Master
 	private $courses;
 
 	public function __construct(
-		$id,
+		UuId $id,
 		$name,
 		$acronym,
 		$description,
@@ -78,7 +78,7 @@ class Master
 	}
 
 	/**
-	 * @return int
+	 * @return UuId
 	 */
 	public function id()
 	{

@@ -22,12 +22,12 @@ final class UuId
 		return $this->id;
 	}
 
-	public function equals(UuId $uiId)
+	public function equals(UuId $a_uiId)
 	{
-		return $this->id() === $uiId->id();
+		return $this->rawId() === $a_uiId->rawId();
 	}
 
-	public function id()
+	public function rawId()
 	{
 		return $this->id;
 	}

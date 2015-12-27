@@ -7,9 +7,9 @@ final class Email
 	/** @var  string */
 	private $email;
 
-	public function __construct($email)
+	public function __construct($a_raw_email)
 	{
-		$this->email = $email;
+		$this->email = $a_raw_email;
 	}
 
 	public static function build($a_raw_email)

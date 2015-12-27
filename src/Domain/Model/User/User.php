@@ -131,7 +131,20 @@ final class User
 		$this->name = $username;
 	}
 
-	public function addMaster()
+	/** MASTER METHODS
+	 * ---------------
+	 * @param $a_name
+	 * @param $an_acronym
+	 * @param $a_description
+	 */
+
+	public function addNewMaster(
+		$a_name,
+		$an_acronym,
+		$a_description
+	)
 	{
+		$new_master                                  = Master::create( $a_name, $an_acronym, $a_description );
+		$this->masters[ $new_master->id()->rawId() ] = $new_master;
 	}
 }
