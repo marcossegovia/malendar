@@ -3,6 +3,8 @@
 namespace Malendar\Domain\Model\Master;
 
 use DateTime;
+use Malendar\Domain\Model\Course\Course;
+use Malendar\Domain\Model\User\User;
 use Malendar\Domain\Model\ValueObject\UuId;
 
 class Master
@@ -33,16 +35,16 @@ class Master
 	private $created_at;
 
 	/**
-	 * @var array
+	 * @var User[]
 	 */
 	private $users;
 
 	/**
-	 * @var array
+	 * @var Course[]
 	 */
 	private $courses;
 
-	public function __construct($id, $name, $acronym, $description, $created_at)
+	public function __construct($id, $name, $acronym, $description, $created_at, array $some_users, array $some_courses)
 	{
 		$this->id          = $id;
 		$this->name        = $name;
@@ -51,26 +53,30 @@ class Master
 		$this->created_at  = $created_at;
 	}
 
+	public static function create($a_name, $an_acronym, $a_description)
+	{
+		$a_new_id        = UuId::generate();
+		$a_creation_date = new DateTime();
+		$all_new_users   = [];
+		$all_new_courses = [];
+
+		return new self( $a_new_id, $a_name, $an_acronym, $a_description, $a_creation_date, $all_new_users,
+						 $all_new_courses
+		);
+	}
+
 	/**
 	 * @return int
 	 */
-	public function getId()
+	public function id()
 	{
 		return $this->id;
 	}
 
 	/**
-	 * @return array
-	 */
-	public function getCourses()
-	{
-		return $this->courses;
-	}
-
-	/**
 	 * @return string
 	 */
-	public function getName()
+	public function name()
 	{
 		return $this->name;
 	}
@@ -78,7 +84,7 @@ class Master
 	/**
 	 * @return string
 	 */
-	public function getAcronym()
+	public function acronym()
 	{
 		return $this->acronym;
 	}
@@ -86,12 +92,12 @@ class Master
 	/**
 	 * @return string
 	 */
-	public function getDescription()
+	public function description()
 	{
 		return $this->description;
 	}
 
-	public function getCreatedAt()
+	public function createdAt()
 	{
 		return $this->created_at;
 	}
@@ -99,9 +105,17 @@ class Master
 	/**
 	 * @return array
 	 */
-	public function getUsers()
+	public function users()
 	{
 		return $this->users;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function courses()
+	{
+		return $this->courses;
 	}
 
 	public function addNewCourse()

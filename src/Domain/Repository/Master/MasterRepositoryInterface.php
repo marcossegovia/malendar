@@ -11,7 +11,7 @@ interface MasterRepositoryInterface
 
 	public function findAll();
 
-	public function findByUserId(UuId $userId);
+	public function findByUserId(UuId $an_user_id);
 
 	public function update();
 

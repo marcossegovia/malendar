@@ -2,8 +2,8 @@
 
 namespace Malendar\Application\Service\User;
 
-use Malendar\Domain\Entities\User\Exception\UserNotFoundException;
-use Malendar\Domain\Entities\User\UserRepositoryInterface;
+use Malendar\Domain\Model\User\Exception\UserNotFoundException;
+use Malendar\Domain\Repository\User\UserRepositoryInterface;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Session\Session;
 

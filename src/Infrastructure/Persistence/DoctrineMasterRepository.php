@@ -9,13 +9,13 @@ use Malendar\Domain\Repository\Master\MasterRepositoryInterface;
 
 class DoctrineMasterRepository extends EntityRepository implements MasterRepositoryInterface
 {
-	public function add(Master $master)
+	public function add(Master $a_master)
 	{
-		$this->_em->persist( $master );
+		$this->_em->persist( $a_master );
 		$this->_em->flush();
 	}
 
-	public function findByUserId(UuId $uuId)
+	public function findByUserId(UuId $an_user_id)
 	{
 
 	}
@@ -25,9 +25,9 @@ class DoctrineMasterRepository extends EntityRepository implements MasterReposit
 		$this->_em->flush();
 	}
 
-	public function remove(Master $master)
+	public function remove(Master $a_master)
 	{
-		$this->_em->remove( $master );
+		$this->_em->remove( $a_master );
 		$this->_em->flush();
 	}
 }

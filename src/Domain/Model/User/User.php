@@ -84,6 +84,16 @@ final class User
 		return $this->hashCode;
 	}
 
+	public function isAdmin()
+	{
+		return $this->admin;
+	}
+
+	public function masters()
+	{
+		return $this->masters;
+	}
+
 	public function validate($password)
 	{
 		if (!hash_equals( $this->hashCode, crypt( $password, $this->hashCode ) ))
@@ -107,16 +117,6 @@ final class User
 	public function setUsername($username)
 	{
 		$this->name = $username;
-	}
-
-	public function isAdmin()
-	{
-		return $this->admin;
-	}
-
-	public function getMasters()
-	{
-		return $this->masters;
 	}
 
 	public function addMaster()
