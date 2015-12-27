@@ -1,14 +1,13 @@
 <?php
 
-namespace Malendar\Domain\Entities\User;
+namespace Malendar\Domain\Model\User;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Malendar\Domain\Entities\Master\Master;
-use Malendar\Domain\Entities\User\Exception\UserValidationException;
-use Malendar\Domain\Entities\ValueObject\UuId;
-use Malendar\Domain\Entities\ValueObject\Email;
+use Malendar\Domain\Model\Master\Master;
+use Malendar\Domain\Model\User\Exception\UserValidationException;
+use Malendar\Domain\Model\ValueObject\UuId;
+use Malendar\Domain\Model\ValueObject\Email;
 
-class User
+final class User
 {
 	/**
 	 * @var UuId
@@ -36,18 +35,18 @@ class User
 	private $admin;
 
 	/**
-	 * @var array
+	 * @var Master[]
 	 */
 	private $masters;
 
-	public function __construct(UuId $a_uuid, $a_name, Email $an_email, $a_hashCode, $an_is_admin)
+	public function __construct(UuId $a_uuid, $a_name, Email $an_email, $a_hashCode, $an_is_admin, $an_array_masters)
 	{
 		$this->id      = $a_uuid;
 		$this->name    = $a_name;
 		$this->email   = $an_email;
 		$this->hashCode = $a_hashCode;
 		$this->admin   = $an_is_admin;
-		$this->masters = new ArrayCollection();
+		$this->masters = $an_array_masters;
 
 	}
 
@@ -60,8 +59,9 @@ class User
 		$salt     = "$3a$10$" . $salt;
 		$hascode  = crypt( $a_password, $salt );
 		$is_admin = $an_is_admin;
+		$array_masters = [];
 
-		return new self($id, $name, $email, $hascode, $is_admin);
+		return new self($id, $name, $email, $hascode, $is_admin, $array_masters);
 	}
 
 	public function id()
@@ -114,18 +114,12 @@ class User
 		return $this->admin;
 	}
 
-	public function getMastersCollection(UserRepositoryInterface $repository)
-	{
-
-	}
-
 	public function getMasters()
 	{
 		return $this->masters;
 	}
 
-	public function addMaster(Master $master)
+	public function addMaster()
 	{
-		$this->masters->add( $master );
 	}
 }

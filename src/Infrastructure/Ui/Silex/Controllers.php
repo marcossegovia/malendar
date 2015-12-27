@@ -3,7 +3,7 @@
 use Malendar\Application\Service\User\LoginUserRequest;
 use Malendar\Application\Service\User\LoginUserService;
 use Malendar\Application\Service\User\LogoutUserService;
-use Malendar\Domain\Entities\User\Exception\UnauthorizedUserException;
+use Malendar\Domain\Model\User\Exception\UnauthorizedUserException;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -1,8 +1,9 @@
 <?php
 
-namespace Malendar\Domain\Entities\User;
+namespace Malendar\Domain\Repository\User;
 
-use Malendar\Domain\Entities\ValueObject\Email;
+use Malendar\Domain\Model\User\User;
+use Malendar\Domain\Model\ValueObject\Email;
 
 interface UserRepositoryInterface
 {

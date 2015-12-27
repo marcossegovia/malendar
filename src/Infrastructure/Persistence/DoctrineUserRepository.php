@@ -3,13 +3,11 @@
 namespace Malendar\Infrastructure\Persistence;
 
 use Doctrine\ORM\EntityRepository;
-use Malendar\Domain\Entities\Master\Master;
-use Malendar\Domain\Entities\User\UserRepositoryInterface;
-use Malendar\Domain\Entities\ValueObject\Email;
-use Malendar\Domain\Entities\User\User;
-use Malendar\Domain\Entities\ValueObject\UuId;
-use Malendar\Infrastructure\Factory\MasterFactory;
-use Malendar\Infrastructure\Factory\UserFactory;
+use Malendar\Domain\Model\Master\Master;
+use Malendar\Domain\Model\ValueObject\Email;
+use Malendar\Domain\Model\User\User;
+use Malendar\Domain\Model\ValueObject\UuId;
+use Malendar\Domain\Repository\User\UserRepositoryInterface;
 
 class DoctrineUserRepository extends EntityRepository implements UserRepositoryInterface
 {
@@ -27,7 +25,7 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
 
 	public function findByEmail(Email $email)
 	{
-		$query = $this->_em->createQuery( 'SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.email.email = :email'
+		$query = $this->_em->createQuery( 'SELECT u FROM Malendar\Domain\Model\User\User u WHERE u.email.email = :email'
 		);
 		$query->setParameter( 'email', $email->getEmail() );
 		$user = $query->getResult();
@@ -40,7 +38,7 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
 
 	public function findByUsername($username)
 	{
-		$query = $this->_em->createQuery( 'SELECT u FROM Malendar\Domain\Entities\User\User u WHERE u.name = :name' );
+		$query = $this->_em->createQuery( 'SELECT u FROM Malendar\Domain\Model\User\User u WHERE u.name = :name' );
 		$query->setParameter( 'name', $username );
 		$user = $query->getResult();
 
@@ -71,8 +69,8 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
 	{
 		$queryBuilder = $this->_em->createQueryBuilder( 'u' );
 		$queryBuilder->select( 'm' )
-			->from( 'Malendar\Domain\Entities\Master\Master', 'm' )
-			->leftjoin( 'Malendar\Domain\Entities\User\User', 'u' )
+			->from( 'Malendar\Domain\Model\Master\Master', 'm' )
+			->leftjoin( 'Malendar\Domain\Model\User\User', 'u' )
 			->where( 'u.id.id = :userId' )
 			->orderBy( 'm.created_at', 'DESC' )
 			->setParameter( 'userId', $a_user_id->id() );

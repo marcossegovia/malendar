@@ -1,6 +1,6 @@
 <?php
 
-namespace Malendar\Domain\Entities\ValueObject;
+namespace Malendar\Domain\Model\ValueObject;
 
 final class UuId
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Malendar\Tests\Domain\Entities;
+namespace Malendar\Tests\Domain\Model;
 
 class MasterTest extends \PHPUnit_Framework_TestCase
 {

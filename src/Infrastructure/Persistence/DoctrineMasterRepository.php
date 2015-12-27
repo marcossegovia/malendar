@@ -3,9 +3,9 @@
 namespace Malendar\Infrastructure\Persistence;
 
 use Doctrine\ORM\EntityRepository;
-use Malendar\Domain\Entities\Master\Master;
-use Malendar\Domain\Entities\Master\MasterRepositoryInterface;
-use Malendar\Domain\Entities\ValueObject\UuId;
+use Malendar\Domain\Model\Master\Master;
+use Malendar\Domain\Model\ValueObject\UuId;
+use Malendar\Domain\Repository\Master\MasterRepositoryInterface;
 
 class DoctrineMasterRepository extends EntityRepository implements MasterRepositoryInterface
 {

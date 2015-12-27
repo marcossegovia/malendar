@@ -15,7 +15,7 @@
 //    public function testNextUserIdReturnsUuId()
 //    {
 //        $app = \Malendar\Infrastructure\Ui\Silex\Application::boostrap();
-//        $this->assertInstanceOf('Malendar\Domain\Entities\ValueObject\UuId', UuIdFactory::create());
+//        $this->assertInstanceOf('Malendar\Domain\Model\ValueObject\UuId', UuIdFactory::create());
 //    }
 //
 //    public function testUserPersistance()

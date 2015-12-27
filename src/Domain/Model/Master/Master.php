@@ -1,10 +1,9 @@
 <?php
 
-namespace Malendar\Domain\Entities\Master;
+namespace Malendar\Domain\Model\Master;
 
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
-use Malendar\Domain\Entities\ValueObject\UuId;
+use Malendar\Domain\Model\ValueObject\UuId;
 
 class Master
 {
@@ -50,8 +49,6 @@ class Master
 		$this->acronym     = $acronym;
 		$this->description = $description;
 		$this->created_at  = $created_at;
-		//$this->users = new ArrayCollection();
-		//$this->courses = new ArrayCollection();
 	}
 
 	/**

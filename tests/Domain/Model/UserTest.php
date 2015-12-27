@@ -1,16 +1,10 @@
 <?php
 
-namespace Malendar\Tests\Domain\Entities;
+namespace Malendar\Tests\Domain\Model;
 
-use Malendar\Domain\Entities\User\Exception\UserValidationException;
-use Malendar\Domain\Entities\User\User;
-use Malendar\Domain\Entities\ValueObject\Email;
-use Malendar\Domain\Entities\ValueObject\UuId;
-use Malendar\Infrastructure\Factory\EmailFactory;
-use Malendar\Infrastructure\Factory\UserFactory;
-use Malendar\Infrastructure\Factory\UuIdFactory;
-use Silex\Application;
-use Silex\Provider\ValidatorServiceProvider;
+use Malendar\Domain\Model\User\Exception\UserValidationException;
+use Malendar\Domain\Model\User\User;
+use Malendar\Domain\Model\ValueObject\Email;
 
 class UserTest extends \PHPUnit_Framework_TestCase
 {

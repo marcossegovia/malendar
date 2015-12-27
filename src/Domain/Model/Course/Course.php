@@ -1,10 +1,10 @@
 <?php
 
-namespace Malendar\Domain\Entities\Course;
+namespace Malendar\Domain\Model\Course;
 
-use Malendar\Domain\Entities\Calendar\Calendar;
-use Malendar\Domain\Entities\Master\Master;
-use Malendar\Domain\Entities\ValueObject\UuId;
+use Malendar\Domain\Model\Calendar\Calendar;
+use Malendar\Domain\Model\Master\Master;
+use Malendar\Domain\Model\ValueObject\UuId;
 
 class Course
 {

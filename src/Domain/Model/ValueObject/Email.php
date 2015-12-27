@@ -1,9 +1,6 @@
 <?php
 
-namespace Malendar\Domain\Entities\ValueObject;
-
-use Silex\Application;
-use Symfony\Component\Validator\Constraints as ValidatorAssert;
+namespace Malendar\Domain\Model\ValueObject;
 
 final class Email
 {
@@ -17,13 +14,15 @@ final class Email
 
 	public static function build($a_raw_email)
 	{
-		return new self($a_raw_email);
+		return new self( $a_raw_email );
 	}
 
-	public function validate(Application $app)
+	public function validate()
 	{
-		return count( $app['validator']->validateValue( $this->email, new ValidatorAssert\Email() )
-		) == 0 ? TRUE : FALSE;
+		if (!filter_var( $this->email, FILTER_VALIDATE_EMAIL ))
+		{
+			throw new \InvalidArgumentException('This is a not valid Email.');
+		}
 	}
 
 	public function __toString()

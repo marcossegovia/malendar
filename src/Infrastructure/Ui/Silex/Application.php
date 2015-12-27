@@ -48,7 +48,7 @@ class Application
 															  "mappings" => array(
 																  array(
 																	  'type'      => 'yml',
-																	  'namespace' => 'Malendar\\Domain\\Entities\\',
+																	  'namespace' => 'Malendar\\Domain\\Model\\',
 																	  'path'      => __DIR__ . "/../../../../app/config/doctrine/",
 																  ),
 															  ),

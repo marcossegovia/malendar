@@ -1,6 +1,6 @@
 <?php
 
-namespace Malendar\Domain\Entities\User\Exception;
+namespace Malendar\Domain\Model\User\Exception;
 
 final class UserValidationException extends UnauthorizedUserException
 {

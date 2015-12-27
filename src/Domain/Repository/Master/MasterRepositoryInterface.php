@@ -1,8 +1,9 @@
 <?php
 
-namespace Malendar\Domain\Entities\Master;
+namespace Malendar\Domain\Repository\Master;
 
-use Malendar\Domain\Entities\ValueObject\UuId;
+use Malendar\Domain\Model\Master\Master;
+use Malendar\Domain\Model\ValueObject\UuId;
 
 interface MasterRepositoryInterface
 {

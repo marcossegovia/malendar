@@ -1,10 +1,9 @@
 <?php
 
-namespace Malendar\Domain\Entities\Calendar;
+namespace Malendar\Domain\Model\Calendar;
 
-use Malendar\Domain\Entities\Course\Course;
-use Malendar\Domain\Entities\ValueObject\UuId;
-use Malendar\Infrastructure\Factory\UuIdFactory;
+use Malendar\Domain\Model\Course\Course;
+use Malendar\Domain\Model\ValueObject\UuId;
 
 class Calendar
 {
@@ -29,7 +28,7 @@ class Calendar
 
 	public static function create()
 	{
-		$id = UuIdFactory::create();
+		$id = UuId::generate();
 
 		return new self( $id );
 	}
