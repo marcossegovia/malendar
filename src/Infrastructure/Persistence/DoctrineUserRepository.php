@@ -11,7 +11,6 @@ use Malendar\Domain\Repository\User\UserRepositoryInterface;
 
 class DoctrineUserRepository extends EntityRepository implements UserRepositoryInterface
 {
-	const NO_USER_FOUND = FALSE;
 
 	public function add(User $a_user)
 	{
@@ -23,29 +22,28 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
 		$this->_em->flush();
 	}
 
+	/** @return User */
+	public function findById(UuId $a_user_id)
+	{
+		$query = parent::find($a_user_id);
+		return  $query->getSingleResult();
+	}
+
 	public function findByEmail(Email $an_email)
 	{
 		$query = $this->_em->createQuery( 'SELECT u FROM Malendar\Domain\Model\User\User u WHERE u.email.email = :email'
 		);
 		$query->setParameter( 'email', $an_email->getEmail() );
-		$user = $query->getResult();
 
-		return $user == NULL ? self::NO_USER_FOUND : new User( $user[0]->id(), $user[0]->name(),
-															   $user[0]->email(), $user[0]->hashCode(),
-															   $user[0]->isAdmin(), $user[0]->masters()
-		);
+		return $query->getSingleResult();
 	}
 
 	public function findByUsername($a_username)
 	{
 		$query = $this->_em->createQuery( 'SELECT u FROM Malendar\Domain\Model\User\User u WHERE u.name = :name' );
 		$query->setParameter( 'name', $a_username );
-		$user = $query->getResult();
 
-		return $user == NULL ? self::NO_USER_FOUND : new User( $user[0]->id(), $user[0]->name(),
-															   $user[0]->email(), $user[0]->hashCode(),
-															   $user[0]->isAdmin(), $user[0]->masters()
-		);
+		return $query->getSingleResult();
 	}
 
 	public function update()
@@ -58,11 +56,4 @@ class DoctrineUserRepository extends EntityRepository implements UserRepositoryI
 		$this->_em->remove( $a_user );
 		$this->_em->flush();
 	}
-
-	public function removeMaster(Master $a_master)
-	{
-		$this->_em->remove( $a_master );
-		$this->_em->flush();
-	}
-
 }

@@ -24,19 +24,7 @@ class DoctrineMasterRepository extends EntityRepository implements MasterReposit
 			->where( 'u.id.id = :userId' )
 			->orderBy( 'm.created_at', 'DESC' )
 			->setParameter( 'userId', $a_user_id->id() );
-		$arrayRawMasters = $queryBuilder->getQuery()->getResult();
-
-		$arrayMasters = [];
-		/** @var Master $master */
-		foreach ($arrayRawMasters as $master)
-		{
-			$arrayMasters[] = new Master( $master->getId(), $master->getName(), $master->getAcronym(),
-				$master->getDescription(), $master->getCreatedAt(), $master->users(), $master->courses()
-			);
-		}
-
-		return $arrayMasters;
-
+		return $queryBuilder->getQuery()->getResult();
 	}
 
 	public function update()

@@ -4,7 +4,7 @@ namespace Malendar\Application\Service\User;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class LogoutUserService
+final class LogoutUserService
 {
 	private $session;
 

@@ -7,13 +7,13 @@ use Malendar\Domain\Model\ValueObject\UuId;
 
 interface MasterRepositoryInterface
 {
-	public function add(Master $master);
+	public function add(Master $a_master);
 
 	public function findAll();
 
-	public function findByUserId(UuId $an_user_id);
+	public function findByUserId(UuId $a_user_id);
 
 	public function update();
 
-	public function remove(Master $master);
+	public function remove(Master $a_master);
 }

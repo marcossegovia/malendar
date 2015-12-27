@@ -4,11 +4,14 @@ namespace Malendar\Domain\Repository\User;
 
 use Malendar\Domain\Model\User\User;
 use Malendar\Domain\Model\ValueObject\Email;
+use Malendar\Domain\Model\ValueObject\UuId;
 
 interface UserRepositoryInterface
 {
 	public function add(User $a_user);
 
+	/** @return User */
+	public function findById(UuId $a_user_id);
 	/** @return User[] */
 	public function findAll();
 
