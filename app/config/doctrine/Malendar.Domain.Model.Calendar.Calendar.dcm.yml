@@ -1,13 +1,13 @@
-Malendar\Domain\Entities\Calendar\Calendar:
+Malendar\Domain\Model\Calendar\Calendar:
   type: entity
   table: calendar
   embedded:
     id:
-      class: Malendar\Domain\Entities\ValueObject\UuId
+      class: Malendar\Domain\Model\ValueObject\UuId
       columnPrefix: false
   oneToOne:
       course:
-        targetEntity: Malendar\Domain\Entities\Course\Course
+        targetEntity: Malendar\Domain\Model\Course\Course
         inversedBy: calendar
         joinColumn:
           name: course_id

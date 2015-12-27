@@ -1,9 +1,9 @@
-Malendar\Domain\Entities\Course\Course:
+Malendar\Domain\Model\Course\Course:
   type: entity
   table: course
   embedded:
     id:
-      class: Malendar\Domain\Entities\ValueObject\UuId
+      class: Malendar\Domain\Model\ValueObject\UuId
       columnPrefix: false
   fields:
     date_start:
@@ -14,12 +14,12 @@ Malendar\Domain\Entities\Course\Course:
       type: simple_array
   manyToOne:
     master:
-      targetEntity: Malendar\Domain\Entities\Master\Master
+      targetEntity: Malendar\Domain\Model\Master\Master
       inversedBy: courses
       joinColumn:
         name: master_id
         referencedColumnName: id
   oneToOne:
     calendar:
-      targetEntity: Malendar\Domain\Entities\Calendar\Calendar
+      targetEntity: Malendar\Domain\Model\Calendar\Calendar
       mappedBy: course

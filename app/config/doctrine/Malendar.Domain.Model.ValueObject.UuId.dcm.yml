@@ -1,4 +1,4 @@
-Malendar\Domain\Entities\ValueObject\UuId:
+Malendar\Domain\Model\ValueObject\UuId:
   type: embeddable
   id:
     id:

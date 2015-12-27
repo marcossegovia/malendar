@@ -1,4 +1,4 @@
-Malendar\Domain\Entities\ValueObject\Email:
+Malendar\Domain\Model\ValueObject\Email:
   type: embeddable
   fields:
     email:

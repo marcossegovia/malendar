@@ -133,6 +133,7 @@ final class User
 
 	/** MASTER METHODS
 	 * ---------------
+	 *
 	 * @param $a_name
 	 * @param $an_acronym
 	 * @param $a_description

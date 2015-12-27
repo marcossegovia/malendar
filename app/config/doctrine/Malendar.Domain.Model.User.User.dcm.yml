@@ -1,13 +1,13 @@
-Malendar\Domain\Entities\User\User:
+Malendar\Domain\Model\User\User:
   type: entity
   repositoryClass: Malendar\Infrastructure\Persistence\DoctrineUserRepository
   table: user
   embedded:
     id:
-      class: Malendar\Domain\Entities\ValueObject\UuId
+      class: Malendar\Domain\Model\ValueObject\UuId
       columnPrefix: false
     email:
-      class: Malendar\Domain\Entities\ValueObject\Email
+      class: Malendar\Domain\Model\ValueObject\Email
       columnPrefix: false
   fields:
     name:
@@ -19,7 +19,7 @@ Malendar\Domain\Entities\User\User:
       type: boolean
   manyToMany:
     masters:
-      targetEntity: Malendar\Domain\Entities\Master\Master
+      targetEntity: Malendar\Domain\Model\Master\Master
       joinTable:
         name: users_masters
         joinColumns:
