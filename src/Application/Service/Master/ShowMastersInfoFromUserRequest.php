@@ -1,6 +1,6 @@
 <?php
 
-namespace Malendar\Application\Service\User;
+namespace Malendar\Application\Service\Master;
 
 use Malendar\Domain\Model\ValueObject\UuId;
 
