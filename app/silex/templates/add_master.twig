@@ -1,0 +1,26 @@
+{% extends "header.twig" %}
+
+{% block title %}Add Master{% endblock %}
+
+{% block content %}
+
+    <header>
+        <h1 class="title">Dashboard</h1>
+        <ul>
+            <li>Logged as <strong>{{ user['username'] }}</strong></li>
+            <li><a href="logout">Logout <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
+        </ul>
+    </header>
+
+    <form action="/master/add">
+        <label>Master name
+            <input id="master-name" name="master-name" type="text" placeholder="First name only" required autofocus>
+        </label>
+        <br>
+        <label>Acronym
+            <input id="master-name" name="master-name" type="text" placeholder="First name only" required>
+        </label>
+        <input type="submit" >
+    </form>
+
+{% endblock %}
